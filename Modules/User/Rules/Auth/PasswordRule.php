@@ -3,7 +3,7 @@
 namespace Modules\User\Rules\Auth;
 
 use Illuminate\Contracts\Validation\Rule;
-use Modules\User\Entities\User;
+use App\Models\User;
 
 class PasswordRule implements Rule
 {

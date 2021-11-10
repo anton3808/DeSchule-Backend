@@ -4,7 +4,7 @@ namespace Modules\User\Transformers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Modules\User\Entities\User;
+use App\Models\User;
 
 class UserResource extends JsonResource
 {

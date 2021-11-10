@@ -4,7 +4,7 @@ namespace Modules\User\Entities;
 
 //use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Orchid\Platform\Models\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
@@ -24,6 +24,7 @@ class User extends Authenticatable
         'phone',
         'birthday',
         'password',
+        'permissions',
     ];
 
     /**
@@ -34,6 +35,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'permissions',
     ];
 
     /**
@@ -42,6 +44,32 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [
+        'permissions'       => 'array',
         'email_verified_at' => 'datetime',
+    ];
+
+    /**
+     * The attributes for which you can use filters in url.
+     *
+     * @var array
+     */
+    protected $allowedFilters = [
+        'id',
+        'name',
+        'email',
+        'permissions',
+    ];
+
+    /**
+     * The attributes for which can use sort in url.
+     *
+     * @var array
+     */
+    protected $allowedSorts = [
+        'id',
+        'name',
+        'email',
+        'updated_at',
+        'created_at',
     ];
 }
