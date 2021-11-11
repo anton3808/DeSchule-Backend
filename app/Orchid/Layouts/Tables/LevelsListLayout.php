@@ -27,7 +27,7 @@ class LevelsListLayout extends Table
     protected function columns(): array
     {
         return [
-            TD::make('code', __('orchid.models.level.code')),
+            TD::make('code', __('orchid.models.level.code'))->sort(),
             TD::make('title', __('orchid.models.level.title')),
             TD::make('priority', __('orchid.models.level.priority'))->sort(),
             TD::make('updated_at', __('orchid.models.default.updated_at'))

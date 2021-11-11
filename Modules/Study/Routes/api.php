@@ -11,5 +11,5 @@
 |
 */
 
-Route::apiResource('level', 'LevelController');
-Route::apiResource('lesson', 'LessonController');
+Route::apiResource('level', 'LevelController')->only(['index', 'show']);
+Route::apiResource('lesson', 'LessonController')->only(['index', 'show']);;

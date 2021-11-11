@@ -36,6 +36,9 @@ class PlatformProvider extends OrchidServiceProvider
                     Menu::make(__('orchid.menu.levels'))
                         ->permission('study.levels')
                         ->route('platform.study.levels.index'),
+                    Menu::make(__('orchid.menu.lessons'))
+                        ->permission('study.lessons')
+                        ->route('platform.study.lessons.index'),
                 ]),
 
 //            Menu::make('Example screen')
@@ -129,6 +132,7 @@ class PlatformProvider extends OrchidServiceProvider
                 ->addPermission('platform.systems.users', __('Users')),
             ItemPermission::group(__('orchid.roles.study'))
                 ->addPermission('study.levels', __('orchid.permissions.levels'))
+                ->addPermission('study.lessons', __('orchid.permissions.lessons'))
         ];
     }
 }

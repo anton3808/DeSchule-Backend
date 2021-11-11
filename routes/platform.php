@@ -116,3 +116,7 @@ Route::screen('example-advanced', ExampleFieldsAdvancedScreen::class)->name('pla
 Route::screen('levels', \App\Orchid\Screens\Study\LevelsScreen::class)->name('platform.study.levels.index');
 Route::screen('level/{level?}', \App\Orchid\Screens\Study\LevelEditScreen::class)
     ->name('platform.study.levels.edit');
+
+Route::screen('lessons', \App\Orchid\Screens\Study\LessonsScreen::class)->name('platform.study.lessons.index');
+Route::screen('lesson/{lesson?}', \App\Orchid\Screens\Study\LessonEditScreen::class)
+    ->name('platform.study.lessons.edit');
