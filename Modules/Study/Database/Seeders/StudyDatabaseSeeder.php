@@ -16,6 +16,9 @@ class StudyDatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        // $this->call("OthersTableSeeder");
+        $this->call([
+            OrchidAdminSeeder::class,
+            LessonElementTypeSeederTableSeeder::class
+        ]);
     }
 }

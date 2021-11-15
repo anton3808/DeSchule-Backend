@@ -9,7 +9,6 @@ use Orchid\Platform\Dashboard;
 use Orchid\Platform\ItemPermission;
 use Orchid\Platform\OrchidServiceProvider;
 use Orchid\Screen\Actions\Menu;
-use Orchid\Support\Color;
 
 class PlatformProvider extends OrchidServiceProvider
 {
@@ -39,6 +38,12 @@ class PlatformProvider extends OrchidServiceProvider
                     Menu::make(__('orchid.menu.lessons'))
                         ->permission('study.lessons')
                         ->route('platform.study.lessons.index'),
+                    Menu::make(__('orchid.menu.lesson_element_types'))
+                        ->permission('study.lesson_element_types')
+                        ->route('platform.study.lessons.lesson_element_types'),
+                    Menu::make(__('orchid.menu.lesson_elements'))
+                        ->permission('study.lesson_elements')
+                        ->route('platform.study.lesson_elements.index'),
                 ]),
 
 //            Menu::make('Example screen')
@@ -133,6 +138,8 @@ class PlatformProvider extends OrchidServiceProvider
             ItemPermission::group(__('orchid.roles.study'))
                 ->addPermission('study.levels', __('orchid.permissions.levels'))
                 ->addPermission('study.lessons', __('orchid.permissions.lessons'))
+                ->addPermission('study.lesson_element_types', __('orchid.permissions.lesson_element_types'))
+                ->addPermission('study.lesson_elements', __('orchid.permissions.lesson_elements'))
         ];
     }
 }

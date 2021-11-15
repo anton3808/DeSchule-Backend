@@ -120,3 +120,11 @@ Route::screen('level/{level?}', \App\Orchid\Screens\Study\LevelEditScreen::class
 Route::screen('lessons', \App\Orchid\Screens\Study\LessonsScreen::class)->name('platform.study.lessons.index');
 Route::screen('lesson/{lesson?}', \App\Orchid\Screens\Study\LessonEditScreen::class)
     ->name('platform.study.lessons.edit');
+
+Route::screen('lesson-element-types', \App\Orchid\Screens\Study\LessonElementTypesListScreen::class)->name('platform.study.lessons.lesson_element_types');
+Route::screen('lesson-element-types/{lesson_element_type}', \App\Orchid\Screens\Study\LessonElementTypeEditScreen::class)
+    ->name('platform.study.lesson_element_types.edit');
+
+Route::screen('lesson-elements', \App\Orchid\Screens\Study\LessonElementsListScreen::class)->name('platform.study.lesson_elements.index');
+Route::screen('lesson-element/{lesson_element?}', \App\Orchid\Screens\Study\LessonElementEditScreen::class)
+    ->name('platform.study.lesson_elements.edit');

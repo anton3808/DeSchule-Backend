@@ -11,7 +11,6 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
-    .postCss('resources/css/app.css', 'public/css', [
-        //
-    ]);
+// mix.js('resources/js/orchid/tables/*.js', 'public/orchid/js');
+
+mix.js('resources/js/orchid/index.js', 'public/js/orchid').vue()

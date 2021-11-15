@@ -108,7 +108,6 @@ class LessonEditScreen extends Screen
                 Group::make(array_merge([
                     Input::make('order')
                         ->type('number')
-                        ->required()
                         ->title(__('orchid.models.lesson.order'))
                         ->placeholder(__('orchid.models.lesson.order')),
                     Select::make('level_id')
@@ -127,7 +126,7 @@ class LessonEditScreen extends Screen
     public function createOrUpdate(Lesson $lesson, Request $request): RedirectResponse
     {
         $request->validate([
-            'order'    => ['required', 'numeric', 'min:1'],
+            'order'    => ['nullable', 'numeric', 'min:1'],
             'level_id' => ['required', 'numeric', 'exists:levels,id'],
             'title.*'  => 'string',
         ]);

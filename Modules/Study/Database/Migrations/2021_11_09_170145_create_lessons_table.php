@@ -16,7 +16,7 @@ class CreateLessonsTable extends Migration
         Schema::create('lessons', function (Blueprint $table) {
             $table->id();
 
-            $table->integer('order');
+            $table->integer('order')->default(0);
             $table->unsignedBigInteger('level_id');
 
 //            $table->unique(['order','level_id']);
