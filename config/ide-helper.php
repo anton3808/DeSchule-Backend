@@ -131,6 +131,7 @@ return [
         'app',
         'Modules\User\Entities',
         'Modules\Study\Entities',
+        'Modules\Study\Entities\Dictionary',
     ],
 
     /*

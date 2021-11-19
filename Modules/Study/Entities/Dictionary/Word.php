@@ -1,26 +1,18 @@
 <?php
 
-namespace Modules\Study\Entities;
+namespace Modules\Study\Entities\Dictionary;
 
 use Astrotomic\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Orchid\Screen\AsSource;
 
-class LessonElement extends Model
+class Word extends Model
 {
     use Translatable, AsSource;
 
-    protected $fillable = ['icon', 'element_type_id', 'data'];
+    protected $fillable = ['word', 'description', 'image'];
 
-    public $translatedAttributes = ['title', 'description'];
-
-    protected $casts = ['data' => 'array'];
-
-    public function elementType(): BelongsTo
-    {
-        return $this->belongsTo(LessonElementType::class, 'element_type_id', 'id');
-    }
+    public $translatedAttributes = ['word_translation', 'word_description_translation'];
 
     /**
      * The attributes for which you can use filters in url.
@@ -29,7 +21,6 @@ class LessonElement extends Model
      */
     protected $allowedFilters = [
         'id',
-        'element_type_id',
         'updated_at',
         'created_at',
     ];
@@ -41,12 +32,13 @@ class LessonElement extends Model
      */
     protected $allowedSorts = [
         'id',
+        'order',
         'updated_at',
         'created_at',
     ];
 }
 
-class LessonElementTranslation extends Model
+class WordTranslation extends Model
 {
     public $timestamps = false;
 }

@@ -2,7 +2,13 @@
     "name": "denispriler/deschule",
     "type": "project",
     "description": "German language studying service.",
-    "keywords": ["framework", "laravel", "german", "study", "deschule"],
+    "keywords": [
+        "framework",
+        "laravel",
+        "german",
+        "study",
+        "deschule"
+    ],
     "license": "MIT",
     "require": {
         "php": "^7.4|^8.0",
@@ -12,11 +18,12 @@
         "laravel/framework": "^8.65",
         "laravel/sanctum": "^2.12",
         "laravel/tinker": "^2.5",
+        "laravel/ui": "^3.3",
         "nwidart/laravel-modules": "^8.2",
-        "orchid/platform": "^10.22"
+        "orchid/platform": "^10.22",
+        "ext-json": "*"
     },
     "require-dev": {
-        "ext-json": "*",
         "barryvdh/laravel-debugbar": "^3.6",
         "barryvdh/laravel-ide-helper": "^2.10",
         "facade/ignition": "^2.5",

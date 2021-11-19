@@ -18,7 +18,8 @@ class StudyDatabaseSeeder extends Seeder
 
         $this->call([
             OrchidAdminSeeder::class,
-            LessonElementTypeSeederTableSeeder::class
+            LessonElementTypeTableSeeder::class,
+            DictionaryWordTableSeeder::class
         ]);
     }
 }

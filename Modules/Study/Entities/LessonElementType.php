@@ -12,7 +12,8 @@ class LessonElementType extends Model
     use Translatable, AsSource;
 
     public static array $typeSlugs = [
-        'read_and_translate' // Прочитать и перевести текс
+        'read_and_translate', // Прочитать и перевести текс
+        'read_and_insert', // Прочитать и перевести текс
     ];
 
     protected $fillable = ['slug'];

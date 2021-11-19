@@ -12,4 +12,8 @@
 */
 
 Route::apiResource('level', 'LevelController')->only(['index', 'show']);
-Route::apiResource('lesson', 'LessonController')->only(['index', 'show']);;
+Route::apiResource('lesson', 'LessonController')->only(['index', 'show']);
+
+//Route::prefix('dictionary')->group(function () {
+//    Route::apiResource('word', 'Dictionary\WordController')->only(['index']);
+//});

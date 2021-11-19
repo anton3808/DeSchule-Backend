@@ -6,7 +6,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 use Modules\Study\Entities\LessonElementType;
 
-class LessonElementTypeSeederTableSeeder extends Seeder
+class LessonElementTypeTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.

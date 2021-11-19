@@ -2,6 +2,8 @@
 
 namespace App\Orchid\Screens\Study;
 
+use App\Orchid\Controllers\Study\LessonElementDataController;
+use App\Orchid\Screens\Extended\ExtendedVueScreen;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Modules\Study\Entities\LessonElement;
@@ -11,16 +13,13 @@ use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Fields\Cropper;
 use Orchid\Screen\Fields\Group;
 use Orchid\Screen\Fields\Input;
-use Orchid\Screen\Fields\Relation;
 use Orchid\Screen\Fields\Select;
-use Orchid\Screen\Fields\Upload;
 use Orchid\Screen\Layout;
-use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Alert;
 use Orchid\Support\Facades\Layout as LayoutFacade;
 use Orchid\Support\Facades\Toast;
 
-class LessonElementEditScreen extends Screen
+class LessonElementEditScreen extends ExtendedVueScreen
 {
     /**
      * Display header name.
@@ -115,7 +114,7 @@ class LessonElementEditScreen extends Screen
             }
             array_push($inputs, $input);
         }
-        return [
+        $rows = [
             LayoutFacade::rows([
                 Group::make(array_splice($inputs, 0, 2)),
                 Group::make($inputs),
@@ -127,9 +126,15 @@ class LessonElementEditScreen extends Screen
                     Select::make('element_type_id')
                         ->fromQuery(LessonElementType::query(), 'title', 'id')
                         ->title(__('orchid.models.lesson_elements.element_type'))
-                ]),
+                        ->id('lesson-element-type-select')
+                ])
             ])
         ];
+        array_push($rows, LayoutFacade::view('orchid.models.LessonElement.data', [
+            'url' => route('platform.study.lesson_elements.data-view'),
+            'id'  => $this->exists ? $this->lessonElement->id : null
+        ]));
+        return $rows;
     }
 
     /**
@@ -154,6 +159,8 @@ class LessonElementEditScreen extends Screen
         $lessonElement->fill($request->only(['element_type_id', 'icon']));
 
         $lessonElement->save();
+
+        LessonElementDataController::SaveLessonElementData($lessonElement->id, $request->get('data'), $request->file('data'));
 
         Toast::info(__('orchid.toasts.actions.saved'));
 

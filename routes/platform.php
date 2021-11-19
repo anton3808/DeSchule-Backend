@@ -7,7 +7,6 @@ use App\Orchid\Screens\Examples\ExampleChartsScreen;
 use App\Orchid\Screens\Examples\ExampleFieldsAdvancedScreen;
 use App\Orchid\Screens\Examples\ExampleFieldsScreen;
 use App\Orchid\Screens\Examples\ExampleLayoutsScreen;
-use App\Orchid\Screens\Examples\ExampleScreen;
 use App\Orchid\Screens\Examples\ExampleTextEditorsScreen;
 use App\Orchid\Screens\PlatformScreen;
 use App\Orchid\Screens\Role\RoleEditScreen;
@@ -128,3 +127,11 @@ Route::screen('lesson-element-types/{lesson_element_type}', \App\Orchid\Screens\
 Route::screen('lesson-elements', \App\Orchid\Screens\Study\LessonElementsListScreen::class)->name('platform.study.lesson_elements.index');
 Route::screen('lesson-element/{lesson_element?}', \App\Orchid\Screens\Study\LessonElementEditScreen::class)
     ->name('platform.study.lesson_elements.edit');
+Route::get('lesson-elements/element-data-view', \App\Orchid\Controllers\Study\LessonElementDataController::class)->name('platform.study.lesson_elements.data-view');
+
+
+Route::prefix('dictionary')->group(function () {
+    Route::screen('words', \App\Orchid\Screens\Study\WordsScreen::class)->name('platform.study.dictionary.words.index');
+    Route::screen('word/{word?}', \App\Orchid\Screens\Study\WordEditScreen::class)
+        ->name('platform.study.dictionary.words.edit');
+});

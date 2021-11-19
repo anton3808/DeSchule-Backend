@@ -7,6 +7,10 @@ return [
         'lessons'              => 'Уроки',
         'lesson_element_types' => 'Типи елементів уроку',
         'lesson_elements'      => 'Елементи уроку',
+        'dictionary'           => [
+            'dictionary' => 'Словник',
+            'words'      => 'Слова'
+        ]
     ],
     'pages'       => [
         'level'                => [
@@ -36,6 +40,13 @@ return [
             'update' => 'Редагування елемента уроку',
             'show'   => 'Елемент уроку',
             'delete' => 'Видалення елемента уроку'
+        ],
+        'word'                 => [
+            'index'  => 'Слова',
+            'create' => 'Створення слова',
+            'update' => 'Редагування слова',
+            'show'   => 'Слово',
+            'delete' => 'Видалення слова'
         ]
     ],
     'links'       => [
@@ -63,14 +74,30 @@ return [
             'description'  => 'Опис'
         ],
         'lesson_element_types' => [
-            'slugs'       => [
+            'slugs'            => [
                 'read_and_translate' => [
                     'title'       => 'Прочитай та переклади',
                     'description' => 'Прочитай текст вголос і спробуй перекласти.  Якщо трапляється незнайоме слово- ти завжди можеш подивитись його у словнику!'
+                ],
+                'read_and_insert'    => [
+                    'title'       => 'Прочитай та впиши пропущені слова у тексті',
+                    'description' => 'Прочитай текст вголос і спробуй перекласти.  Якщо трапляється незнайоме слово- ти завжди можеш подивитись його у словнику!'
                 ]
             ],
-            'title'       => 'Назва',
-            'description' => 'Опис'
+            'title'            => 'Назва',
+            'description'      => 'Опис',
+            'text'             => 'Текст',
+            'image'            => 'Зображення',
+            'video'            => 'Відео',
+            'previously_video' => 'Попереднє відео',
+            'word'             => 'Слово'
+        ],
+        'word'                 => [
+            'word'                         => 'Слово',
+            'description'                  => 'Опис',
+            'image'                        => 'Зображення',
+            'word_translation'             => 'Переклад слова',
+            'word_description_translation' => 'Переклад опису'
         ],
         'default'              => [
             'created_at' => 'Дата створення',
@@ -81,7 +108,8 @@ return [
         'lessons'              => 'Уроки',
         'levels'               => 'Рівні',
         'lesson_element_types' => 'Типи елементів уроку',
-        'lesson_elements'      => 'Елементи уроку'
+        'lesson_elements'      => 'Елементи уроку',
+        'dictionary'           => 'Словник',
     ],
     'roles'       => [
         'study' => 'Навчальна програма'
