@@ -24,7 +24,7 @@ class DictionaryWordTableSeeder extends Seeder
             }
             $word->save();
         }
-        if(env('APP_DEBUG')) {
+        if(env('APP_DEBUG') && Word::count() < 100) {
             for ($i = 0; $i < 100; $i++) {
                 $key = \Str::random(5);
                 $word = Word::whereWord($key)->firstOrNew();

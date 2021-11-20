@@ -20,12 +20,11 @@ window.Vue = require('vue').default;
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 const LessonElementData = Vue.component('lesson-element-data', require('./components/models/LessonElement/Data.vue').default);
-const TextInsert = Vue.component('lesson-element-data', require('./components/models/LessonElement/TextInsert.vue').default);
 
 if (document.getElementById('orchid-vue-app')) {
     const app = new Vue({
         el: '#orchid-vue-app',
-        components: {LessonElementData, TextInsert}
+        components: {LessonElementData}
     });
 }
 

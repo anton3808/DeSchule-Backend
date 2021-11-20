@@ -14,6 +14,7 @@ class LessonElementType extends Model
     public static array $typeSlugs = [
         'read_and_translate', // Прочитать и перевести текс
         'read_and_insert', // Прочитать и перевести текс
+        'read_and_answer', // Прочитать и перевести текс
     ];
 
     protected $fillable = ['slug'];

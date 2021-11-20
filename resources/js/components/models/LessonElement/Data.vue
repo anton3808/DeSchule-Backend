@@ -1,16 +1,19 @@
 <template>
     <div v-if="template">
-        <component v-if="template.component" :is="template.component" :data="template.data" :dom="template.dom"/>
+        <component v-if="template.component" :is="template.component" v-bind="template.attributes">
+            <div v-if="template.vHtml" v-html="template.vHtml"></div>
+        </component>
         <div v-else v-html="template"></div>
     </div>
 </template>
 
 <script>
-import TextInsert from "./TextInsert";
+import TextInsert from './TextInsert';
+import TextMultiply from './TextMultiply';
 
 export default {
-    name: "Data",
-    components: {TextInsert},
+    name: 'Data',
+    components: {TextInsert, TextMultiply},
     data: () => ({
         selectedType: null,
         template: null
