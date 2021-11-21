@@ -18,13 +18,23 @@
                  v-for="(question, index) in questions">
                 <label :for="`data-question-${index}-question`" class="form-label">{{ translations.question }}
                     #{{ index + 1 }}<sup class="text-danger">*</sup></label>
-                <div data-controller="input" data-input-mask>
+                <div data-controller="input" data-input-mask class="d-flex flex-row justify-content-evenly align-items-center">
                     <input :name="`data[questions][${index}][question]`" :title="translations.question"
                            required="required" :placeholder="translations.question"
                            :value="question.question"
                            @change="e => questions[index].question = e.target.value"
                            :id="`data-question-${index}-question`"
                            class="form-control mw-100">
+
+                    <button
+                        type="button"
+                        @click="() => removeQuestion(index)"
+                        data-controller="button"
+                        class="btn btn-danger ms-2 text-center"
+                        style="min-width: 150px;"
+                        :data-turbo="true">
+                        {{ actionsTranslations.remove_question }}
+                    </button>
                 </div>
 
                 <div class="my-1" v-for="(answer, answerIndex) in question.answers">
@@ -58,14 +68,6 @@
                         class="btn btn-success me-2"
                         :data-turbo="true">
                         {{ actionsTranslations.add_answer }}
-                    </button>
-                    <button
-                        type="button"
-                        @click="() => removeQuestion(index)"
-                        data-controller="button"
-                        class="btn btn-danger"
-                        :data-turbo="true">
-                        {{ actionsTranslations.remove_question }}
                     </button>
                 </div>
             </div>

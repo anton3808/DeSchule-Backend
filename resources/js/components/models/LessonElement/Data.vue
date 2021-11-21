@@ -1,63 +1,20 @@
 <template>
     <div v-if="template">
-        <component v-if="template.component" :is="template.component" v-bind="template.attributes">
-            <div v-if="template.vHtml" v-html="template.vHtml"></div>
-        </component>
-        <div v-else v-html="template"></div>
+        <div v-if="!template.component" v-html="template"></div>
+        <div v-else id="lesson-element-data">
+            <div v-html="template.vHtml"></div>
+            <component :is="template.component" v-bind="template.attributes"/>
+        </div>
     </div>
 </template>
 
 <script>
-import TextInsert from './TextInsert';
-import TextMultiply from './TextMultiply';
+import TextInsert from "./components/TextInsert";
+import TextMultiply from "./components/TextMultiply";
 
 export default {
     name: 'Data',
-    components: {TextInsert, TextMultiply},
-    data: () => ({
-        selectedType: null,
-        template: null
-    }),
-    watch: {
-        selectedType() {
-            this.getTemplateView(this.selectedType)
-        }
-    },
-    props: {
-        typeSelectId: {
-            type: String,
-            required: true,
-        },
-        url: {
-            type: String,
-            required: true
-        },
-        id: {
-            type: String | Number,
-            default: null
-        }
-    },
-    mounted() {
-        // костыль от дубликации select элементов
-        if (document.getElementById(this.typeSelectId).nextSibling) {
-            document.getElementById(this.typeSelectId).nextSibling.remove()
-        }
-
-        this.selectedType = Number(document.getElementById(this.typeSelectId).value)
-        document.getElementById(this.typeSelectId).onchange = e => {
-            this.selectedType = Number(e.target.value)
-        }
-    },
-    methods: {
-        getTemplateView(type) {
-            let url = `${this.url}?type=${type}`
-            if (this.id && Number(this.id)) {
-                url = `${url}&id=${this.id}`
-            }
-            window.axios.get(url).then(({data}) => {
-                this.template = data
-            })
-        }
-    }
+    props: ['template'],
+    components: {TextInsert, TextMultiply}
 }
 </script>

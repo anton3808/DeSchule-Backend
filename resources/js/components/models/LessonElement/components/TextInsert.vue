@@ -6,15 +6,15 @@
 
 <script>
 
-import {createSelectNode} from '../../../helpers';
+import {createSelectNode} from '../../../../helpers';
 
 export default {
     name: 'TextInsert',
+    data: () => ({
+        cardNode: null,
+        quillInput: null
+    }),
     props: {
-        vHtml: {
-            type: String,
-            default: null
-        },
         selectedWords: {
             type: Array|Object,
             default: () => []
@@ -24,15 +24,10 @@ export default {
             default: () => []
         }
     },
-    computed: {
-        cardNode() {
-            return this.$refs.domWrapper.querySelector('.bg-white')
-        },
-        quillInput() {
-            return this.$refs.domWrapper.querySelector('input[name="data[text]"]')
-        }
-    },
     mounted() {
+        this.cardNode = document.querySelector('#lesson-element-data').querySelector('div.bg-white')
+        this.quillInput = this.cardNode.querySelector('input[name="data[text]"]')
+
         if (this.selectedWords) {
             const keys = Object.keys(this.selectedWords)
             for (let i = 0; i < keys.length; i++) {
