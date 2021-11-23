@@ -24,7 +24,7 @@ class LessonElementComponent extends Component
     public function __construct()
     {
         $this->lessonElement = request()->route()->parameter('lessonElement');
-        $this->exists = $this->lessonElement->exists;
+        $this->exists = !is_null($this->lessonElement) && $this->lessonElement->exists;
     }
 
     /**
