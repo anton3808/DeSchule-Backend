@@ -5,6 +5,7 @@ namespace Modules\Study\Transformers\Lesson;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Modules\Study\Entities\Lesson;
+use Modules\Study\Transformers\LessonElement\LessonElementResource;
 
 class LessonResource extends JsonResource
 {
@@ -18,9 +19,10 @@ class LessonResource extends JsonResource
     {
         /** @var Request|Lesson $this */
         return [
-            'order' => $this->order,
-            'level' => $this->level_id,
-            'title' => $this->getTranslation(app()->getLocale())->title
+            'order'    => $this->order,
+            'level'    => $this->level_id,
+            'title'    => $this->getTranslation(app()->getLocale())->title,
+            'elements' => LessonElementResource::collection($this->whenLoaded('elements'))
         ];
     }
 }

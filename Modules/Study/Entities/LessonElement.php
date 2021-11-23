@@ -7,6 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Orchid\Screen\AsSource;
 
+/**
+ * Class LessonElement
+ * @package Modules\Study\Entities
+ *
+ * @property string $title
+ * @property string $description
+ */
 class LessonElement extends Model
 {
     use Translatable, AsSource;
@@ -44,6 +51,11 @@ class LessonElement extends Model
         'updated_at',
         'created_at',
     ];
+
+    public function getOrchidTagAttribute(): string
+    {
+        return "#$this->id $this->title";
+    }
 }
 
 class LessonElementTranslation extends Model

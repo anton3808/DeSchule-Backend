@@ -47,6 +47,7 @@ class LessonController extends Controller
      */
     public function show(Lesson $lesson): LessonResource
     {
+        $lesson->load('elements.elementType');
         return LessonResource::make($lesson);
     }
 

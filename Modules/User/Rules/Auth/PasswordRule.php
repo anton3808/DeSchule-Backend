@@ -28,7 +28,7 @@ class PasswordRule implements Rule
      */
     public function passes($attribute, $value): bool
     {
-        return password_verify($value, $this->user->password);
+        return password_verify($value, optional($this->user)->password);
     }
 
     /**

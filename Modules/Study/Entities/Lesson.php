@@ -5,6 +5,7 @@ namespace Modules\Study\Entities;
 use Astrotomic\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Orchid\Screen\AsSource;
 
 class Lesson extends Model
@@ -44,6 +45,11 @@ class Lesson extends Model
         'updated_at',
         'created_at',
     ];
+
+    public function elements(): BelongsToMany
+    {
+        return $this->belongsToMany(LessonElement::class, 'lessons_has_lesson_elements', 'lesson_id', 'lesson_element_id');
+    }
 }
 
 class LessonTranslation extends Model

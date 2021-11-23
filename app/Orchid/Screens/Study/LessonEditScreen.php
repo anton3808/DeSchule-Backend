@@ -2,13 +2,16 @@
 
 namespace App\Orchid\Screens\Study;
 
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Http\RedirectResponse;
 use Modules\Study\Entities\Lesson;
+use Modules\Study\Entities\LessonElement;
 use Modules\Study\Entities\Level;
 use Orchid\Screen\Action;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Fields\Group;
 use Orchid\Screen\Fields\Input;
+use Orchid\Screen\Fields\Relation;
 use Orchid\Screen\Fields\Select;
 use Orchid\Screen\Layout;
 use Orchid\Screen\Screen;
@@ -89,6 +92,7 @@ class LessonEditScreen extends Screen
      * Views.
      *
      * @return Layout[]|string[]
+     * @throws BindingResolutionException
      */
     public function layout(): array
     {
@@ -105,15 +109,22 @@ class LessonEditScreen extends Screen
         }
         return [
             LayoutFacade::rows([
-                Group::make(array_merge([
+                Group::make($titles),
+                Group::make([
                     Input::make('order')
                         ->type('number')
                         ->title(__('orchid.models.lesson.order'))
                         ->placeholder(__('orchid.models.lesson.order')),
                     Select::make('level_id')
                         ->title(__('orchid.models.lesson.level'))
-                        ->fromModel(Level::class, 'code', 'id')
-                ], $titles))
+                        ->fromModel(Level::class, 'code', 'id'),
+                    Relation::make('elements.')
+                        ->value($this->exists ? $this->lesson->elements : [])
+                        ->title(__('orchid.models.lesson.elements'))
+                        ->fromModel(LessonElement::class, 'id', 'id')
+                        ->displayAppend('orchid_tag')
+                        ->multiple()
+                ])
             ])
         ];
     }
@@ -129,7 +140,9 @@ class LessonEditScreen extends Screen
             'order'    => ['nullable', 'numeric', 'min:1'],
             'level_id' => ['required', 'numeric', 'exists:levels,id'],
             'title.*'  => 'string',
+            'elements' => ['nullable', 'array']
         ]);
+
 
         foreach (config('locales') as $locale) {
             $lesson->translateOrNew($locale)->title = $request->get('title')[$locale];
@@ -139,9 +152,11 @@ class LessonEditScreen extends Screen
 
         $lesson->save();
 
+        $lesson->elements()->sync($request->get('elements'));
+
         Toast::info(__('orchid.toasts.actions.saved'));
 
-        return redirect()->route('platform.study.lessons.edit', ['level' => $lesson->id]);
+        return redirect()->route('platform.study.lessons.edit', ['lesson' => $lesson->id]);
     }
 
     /**

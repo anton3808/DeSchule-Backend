@@ -27,6 +27,7 @@ class LessonElementsListLayout extends Table
     protected function columns(): array
     {
         return [
+            TD::make('id', __('#')),
             TD::make('title', __('orchid.models.lesson_elements.title')),
             TD::make('element_type', __('orchid.models.lesson_elements.element_type'))
                 ->render(function (LessonElement $lessonElement) {

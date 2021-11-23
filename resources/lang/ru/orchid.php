@@ -67,9 +67,10 @@ return [
             'priority' => 'Приоритет'
         ],
         'lesson'               => [
-            'order' => 'Порядок',
-            'title' => 'Название',
-            'level' => 'Уровень',
+            'order'    => 'Порядок',
+            'title'    => 'Название',
+            'level'    => 'Уровень',
+            'elements' => 'Элементы'
         ],
         'lesson_elements'      => [
             'icon'         => 'Иконка',

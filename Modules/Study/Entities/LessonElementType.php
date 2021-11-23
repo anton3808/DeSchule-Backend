@@ -7,6 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use Orchid\Screen\AsSource;
 
+/**
+ * Class LessonElementType
+ * @package Modules\Study\Entities
+ *
+ * @property string $title
+ * @property string $description
+ */
 class LessonElementType extends Model
 {
     use Translatable, AsSource;
