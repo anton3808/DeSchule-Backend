@@ -2,13 +2,14 @@
 
 namespace Modules\User\Events\Auth;
 
+use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 use Modules\User\Entities\User;
 
 class UserRegisteredEvent
 {
-    use SerializesModels, Dispatchable;
+    use Dispatchable, InteractsWithSockets, SerializesModels;
 
     /**
      * User instance.
@@ -26,14 +27,4 @@ class UserRegisteredEvent
     {
         $this->user = $user;
     }
-
-//    /**
-//     * Get the channels the event should be broadcast on.
-//     *
-//     * @return array
-//     */
-//    public function broadcastOn()
-//    {
-//        return [];
-//    }
 }

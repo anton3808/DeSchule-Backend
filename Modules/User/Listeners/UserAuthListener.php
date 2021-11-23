@@ -29,6 +29,6 @@ class UserAuthListener
 
     public function handleRegisteredEvent(UserRegisteredEvent $event)
     {
-
+        dd($event);
     }
 }

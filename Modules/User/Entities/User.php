@@ -72,4 +72,9 @@ class User extends Authenticatable
         'updated_at',
         'created_at',
     ];
+
+    public function getFullNameAttribute(): string
+    {
+        return "$this->name $this->surname";
+    }
 }

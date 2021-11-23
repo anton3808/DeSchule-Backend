@@ -1,10 +1,10 @@
 <template>
     <div v-if="template">
-        <div v-if="!template.component" v-html="template"></div>
-        <div v-else id="lesson-element-data">
+        <div v-if="template.component" id="lesson-element-data">
             <div v-html="template.vHtml"></div>
             <component :is="template.component" v-bind="template.attributes"/>
         </div>
+        <div v-else v-html="template"></div>
     </div>
 </template>
 

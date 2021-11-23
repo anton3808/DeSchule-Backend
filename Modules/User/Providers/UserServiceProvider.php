@@ -3,19 +3,20 @@
 namespace Modules\User\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Database\Eloquent\Factory;
+use Modules\User\Events\Auth\UserRegisteredEvent;
+use Modules\User\Listeners\UserAuthListener;
 
 class UserServiceProvider extends ServiceProvider
 {
     /**
      * @var string $moduleName
      */
-    protected $moduleName = 'User';
+    protected string $moduleName = 'User';
 
     /**
      * @var string $moduleNameLower
      */
-    protected $moduleNameLower = 'user';
+    protected string $moduleNameLower = 'user';
 
     /**
      * Boot the application events.
@@ -28,6 +29,11 @@ class UserServiceProvider extends ServiceProvider
         $this->registerConfig();
         $this->registerViews();
         $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/Migrations'));
+    }
+
+    public static function listenUserAuthEvents()
+    {
+        \Event::listen(UserRegisteredEvent::class, [UserAuthListener::class, 'handleRegisteredEvent']);
     }
 
     /**
@@ -94,7 +100,7 @@ class UserServiceProvider extends ServiceProvider
      *
      * @return array
      */
-    public function provides()
+    public function provides(): array
     {
         return [];
     }

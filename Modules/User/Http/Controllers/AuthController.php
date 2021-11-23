@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
 use Modules\User\Entities\User;
+use Modules\User\Events\Auth\UserRegisteredEvent;
 use Modules\User\Http\Requests\Auth\LoginRequest;
 use Modules\User\Http\Requests\Auth\RegisterRequest;
 use Modules\User\Transformers\UserResource;
@@ -18,6 +19,9 @@ class AuthController extends Controller
             'password' => bcrypt($request->get('password'))
         ]));
         $token = $user->createToken('accessToken');
+
+        event(new UserRegisteredEvent($user));
+
         return response()->json([
             'access_token' => $token->plainTextToken,
             'user'         => UserResource::make($user)

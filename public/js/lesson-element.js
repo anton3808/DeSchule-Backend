@@ -3514,9 +3514,8 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _vm.template
     ? _c("div", [
-        !_vm.template.component
-          ? _c("div", { domProps: { innerHTML: _vm._s(_vm.template) } })
-          : _c(
+        _vm.template.component
+          ? _c(
               "div",
               { attrs: { id: "lesson-element-data" } },
               [
@@ -3535,7 +3534,8 @@ var render = function () {
                 ),
               ],
               1
-            ),
+            )
+          : _c("div", { domProps: { innerHTML: _vm._s(_vm.template) } }),
       ])
     : _vm._e()
 }
