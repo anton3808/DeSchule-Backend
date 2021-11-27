@@ -2,6 +2,7 @@
 
 namespace App\Orchid\Repositories;
 
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Modules\Study\Entities\Dictionary\Word;
 use Modules\Study\Transformers\Dictionary\Word\WordResource;
 use Orchid\Screen\Actions\Link;
@@ -9,6 +10,8 @@ use Orchid\Screen\Fields\Cropper;
 use Orchid\Screen\Fields\Group;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Quill;
+use Orchid\Screen\Fields\Relation;
+use Orchid\Screen\Fields\Upload;
 use Orchid\Support\Facades\Layout as LayoutFacade;
 use Throwable;
 use Orchid\Screen\Repository;
@@ -102,6 +105,57 @@ class LessonElementDataRepository
                         ->required()
                         ->class('form-control mw-100'),
                 ])
+            ])->render()
+        ];
+    }
+
+    /**
+     * @throws BindingResolutionException
+     */
+    public static function TranslateWordsLayout(?array $data = []): array
+    {
+        return [
+            Relation::make('data.words.')
+                ->fromModel(Word::class, 'word', 'id')
+                ->multiple()
+                ->value(array_key_exists('words', $data) ? $data['words'] : [])
+                ->title(__('orchid.models.lesson_element_types.words'))
+        ];
+    }
+
+    /**
+     * @throws Throwable
+     */
+    public static function WatchVideoAndAnswerLayout(?array $data = []): array
+    {
+        $videoLayout = [];
+        if (array_key_exists('video', $data)) {
+            array_push($videoLayout, Link::make(__('orchid.models.lesson_element_types.previously_video'))->href($data['video']));
+        }
+        array_push($videoLayout,
+            Input::make('data.video')
+                ->type('file')
+                ->title(__('orchid.models.lesson_element_types.video'))
+                ->set('accept', 'video/*')
+                ->class('form-control mw-100')
+        );
+        return [
+            'component'  => 'text-multiply',
+            'attributes' => [
+                'translations'        => [
+                    'question' => __('orchid.models.lesson_element_types.question'),
+                    'answer'   => __('orchid.models.lesson_element_types.answer'),
+                ],
+                'actionsTranslations' => [
+                    'add_question'    => __('orchid.actions.add_item', ['item' => mb_strtolower(__('orchid.models.lesson_element_types.question'))]),
+                    'remove_question' => __('orchid.actions.remove_item', ['item' => mb_strtolower(__('orchid.models.lesson_element_types.question'))]),
+                    'add_answer'      => __('orchid.actions.add_item', ['item' => mb_strtolower(__('orchid.models.lesson_element_types.answer'))]),
+                    'remove_answer'   => __('orchid.actions.remove_item', ['item' => mb_strtolower(__('orchid.models.lesson_element_types.answer'))]),
+                ],
+                'dataQuestions'       => array_key_exists('questions', $data) ? $data['questions'] : null
+            ],
+            'vHtml'      => view('orchid.layouts.base-layout', [
+                'layouts' => self::RenderFieldsetLayout([Group::make($videoLayout)->alignCenter()])
             ])->render()
         ];
     }

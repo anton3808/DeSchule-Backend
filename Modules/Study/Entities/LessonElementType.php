@@ -22,6 +22,8 @@ class LessonElementType extends Model
         'read_and_translate', // Прочитать и перевести текс
         'read_and_insert', // Прочитать и перевести текс
         'read_and_answer', // Прочитать и перевести текс
+        'translate_words', // Перевести слова
+        'watch_video_and_answer', // Посмотреть видео и ответить на вопросы
     ];
 
     protected $fillable = ['slug'];

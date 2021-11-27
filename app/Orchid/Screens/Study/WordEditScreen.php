@@ -93,7 +93,6 @@ class WordEditScreen extends Screen
     public function layout(): array
     {
         $translations = [];
-        $wordDescriptionTranslations = [];
         foreach (config('locales') as $locale) {
             $input = Input::make("word_translation.$locale")
                 ->title(__('orchid.models.word.word_translation') . " ($locale)")
