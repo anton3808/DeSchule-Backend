@@ -18,6 +18,7 @@ class User extends Authenticatable
      * @var string[]
      */
     protected $fillable = [
+        'login',
         'name',
         'surname',
         'email',
@@ -55,8 +56,11 @@ class User extends Authenticatable
      */
     protected $allowedFilters = [
         'id',
+        'login',
         'name',
+        'surname',
         'email',
+        'phone',
         'permissions',
     ];
 
@@ -67,8 +71,11 @@ class User extends Authenticatable
      */
     protected $allowedSorts = [
         'id',
+        'login',
         'name',
+        'surname',
         'email',
+        'phone',
         'updated_at',
         'created_at',
     ];

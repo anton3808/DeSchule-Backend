@@ -36,7 +36,10 @@ class AuthController extends Controller
 
     public function login(LoginRequest $request): JsonResponse
     {
-        $user = User::wherePhone($request->get('login'))->orWhere('email', $request->get('login'))->first();
+        $user = User::wherePhone($request->get('login'))
+            ->orWhere('email', $request->get('login'))
+            ->orWhere('login', $request->get('login'))
+            ->first();
         $token = $user->createToken('accessToken');
         return response()->json([
             'access_token' => $token->plainTextToken,

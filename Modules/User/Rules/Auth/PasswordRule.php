@@ -16,7 +16,7 @@ class PasswordRule implements Rule
      */
     public function __construct(string $login)
     {
-        $this->user = User::wherePhone($login)->orWhere('email', $login)->first();
+        $this->user = User::wherePhone($login)->orWhere('email', $login)->orWhere('login', $login)->first();
     }
 
     /**

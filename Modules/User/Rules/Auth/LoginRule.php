@@ -26,7 +26,7 @@ class LoginRule implements Rule
      */
     public function passes($attribute, $value): bool
     {
-        return User::wherePhone($value)->orWhere('email', $value)->exists();
+        return User::wherePhone($value)->orWhere('email', $value)->orWhere('login', $value)->exists();
     }
 
     /**
