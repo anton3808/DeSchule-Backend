@@ -1,0 +1,1 @@
+<span> {{ $code }} </span>

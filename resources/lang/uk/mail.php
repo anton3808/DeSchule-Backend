@@ -2,8 +2,11 @@
 
 return [
     'user' => [
-        'registered' => [
+        'registered'      => [
             'subject' => 'Вітаємо на :name'
+        ],
+        'change-password' => [
+            'subject' => 'Відновлення пароля'
         ]
     ]
 ];

@@ -3,6 +3,7 @@
 namespace Modules\User\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Modules\User\Events\Auth\UserChangePasswordEvent;
 use Modules\User\Events\Auth\UserRegisteredEvent;
 use Modules\User\Listeners\UserAuthListener;
 
@@ -29,11 +30,6 @@ class UserServiceProvider extends ServiceProvider
         $this->registerConfig();
         $this->registerViews();
         $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/Migrations'));
-    }
-
-    public static function listenUserAuthEvents()
-    {
-        \Event::listen(UserRegisteredEvent::class, [UserAuthListener::class, 'handleRegisteredEvent']);
     }
 
     /**
