@@ -13,6 +13,7 @@
 
 Route::apiResource('level', 'LevelController')->only(['index', 'show']);
 Route::apiResource('lesson', 'LessonController')->only(['index', 'show']);
+//Route::apiResource('user-answer', 'UserAnswerController')->only(['store']);
 
 //Route::prefix('dictionary')->group(function () {
 //    Route::apiResource('word', 'Dictionary\WordController')->only(['index']);

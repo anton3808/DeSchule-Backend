@@ -126,8 +126,8 @@ return [
     'url'                  => 'Поле :attribute имеет ошибочный формат URL.',
     'uuid'                 => 'Поле :attribute должно быть корректным UUID.',
     'custom'               => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'data' => [
+            'required' => 'Пожалуйста, заполните данные для проверки',
         ],
     ],
     'attributes'           => [
@@ -137,4 +137,11 @@ return [
         'order'    => 'Номер',
         'level'    => 'Уровень'
     ],
+    'user_answer'          => [
+        'types' => [
+            'read_and_insert' => 'Пожалуйста, укажите переводы для всех слов (:count)',
+            'read_and_answer' => 'Пожалуйста, ответьте на все вопросы (:count)',
+            'translate_words' => 'Пожалуйста, переведите все слова прежде чем отвечать (:count)',
+        ]
+    ]
 ];

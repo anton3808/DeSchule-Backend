@@ -20,8 +20,8 @@ class LessonElementType extends Model
 
     public static array $typeSlugs = [
         'read_and_translate', // Прочитать и перевести текс
-        'read_and_insert', // Прочитать и перевести текс
-        'read_and_answer', // Прочитать и перевести текс
+        'read_and_insert', // Прочитать и вставить пропущенные слова
+        'read_and_answer', // Прочитать и ответить на вопрос
         'translate_words', // Перевести слова
         'watch_video_and_answer', // Посмотреть видео и ответить на вопросы
     ];

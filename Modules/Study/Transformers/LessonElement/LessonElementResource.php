@@ -18,6 +18,7 @@ class LessonElementResource extends JsonResource
     {
         /** @var JsonResource|LessonElement $this */
         return [
+            'id'          => $this->id,
             'icon'        => $this->icon,
             'title'       => $this->title,
             'description' => $this->description,

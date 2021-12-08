@@ -126,8 +126,8 @@ return [
     'url'                  => 'Формат поля :attribute хибний.',
     'uuid'                 => 'Поле :attribute має бути коректним UUID ідентифікатором.',
     'custom'               => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'data' => [
+            'required' => 'Будь ласка, заповніть дані для перевірки',
         ],
     ],
     'attributes'           => [
@@ -137,4 +137,11 @@ return [
         'order'    => 'Номер',
         'level'    => 'Рівень'
     ],
+    'user_answer'          => [
+        'types' => [
+            'read_and_insert' => 'Будь ласка, вкажіть переклади для всіх слів (:count)',
+            'read_and_answer' => 'Будь ласка, дайте відповідь на всі запитання (:count)',
+            'translate_words' => 'Будь ласка, переведіть усі слова перш ніж відповідати (:count)',
+        ]
+    ]
 ];
