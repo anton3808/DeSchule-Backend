@@ -31,7 +31,7 @@ class WordsListLayout extends Table
             TD::make('description', __('orchid.models.word.description')),
             TD::make('updated_at', __('orchid.models.default.updated_at'))
                 ->render(function (Word $word) {
-                    return $word->updated_at->format('d.m.Y H:s:i');
+                    return $word->updated_at->format('d.m.Y H:i:s');
                 })
                 ->sort(),
             TD::make()

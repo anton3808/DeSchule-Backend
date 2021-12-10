@@ -10,9 +10,20 @@ return [
         'dictionary'           => [
             'dictionary' => 'Словник',
             'words'      => 'Слова'
+        ],
+        'schedule'             => [
+            'schedule'    => 'Календар',
+            'event_types' => 'Типи подій'
         ]
     ],
     'pages'       => [
+        'event_types'          => [
+            'index'  => 'Типи подій',
+            'create' => 'Створення типу події',
+            'update' => 'Редагування типу події',
+            'show'   => 'Типи події',
+            'delete' => 'Видалення типу події'
+        ],
         'level'                => [
             'index'  => 'Рівні',
             'create' => 'Створення рівня',
@@ -122,6 +133,9 @@ return [
         'default'              => [
             'created_at' => 'Дата створення',
             'updated_at' => 'Останнє редагування'
+        ],
+        'event_types'          => [
+            'title' => 'Назва',
         ]
     ],
     'permissions' => [
@@ -130,9 +144,11 @@ return [
         'lesson_element_types' => 'Типи елементів уроку',
         'lesson_elements'      => 'Елементи уроку',
         'dictionary'           => 'Словник',
+        'event_types'          => 'Типи подій'
     ],
     'roles'       => [
-        'study' => 'Навчальна програма'
+        'study'    => 'Навчальна програма',
+        'schedule' => 'Календар'
     ],
     'toasts'      => [
         'actions' => [

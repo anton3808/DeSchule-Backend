@@ -14,8 +14,8 @@ class UserDatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Model::unguard();
-
-        // $this->call("OthersTableSeeder");
+        $this->call([
+            EventTypeTableSeeder::class
+        ]);
     }
 }

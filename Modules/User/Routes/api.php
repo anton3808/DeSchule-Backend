@@ -10,3 +10,5 @@
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+Route::apiResource('schedule', 'ScheduleController')->only(['index', 'store']);

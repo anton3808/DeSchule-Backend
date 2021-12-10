@@ -10,9 +10,20 @@ return [
         'dictionary'           => [
             'dictionary' => 'Словарь',
             'words'      => 'Слова'
+        ],
+        'schedule'             => [
+            'schedule'    => 'Календарь',
+            'event_types' => 'Типы событий'
         ]
     ],
     'pages'       => [
+        'event_types'          => [
+            'index'  => 'Типы событий',
+            'create' => 'Создание типа собития',
+            'update' => 'Редактирование типа события',
+            'show'   => 'Тип события',
+            'delete' => 'Удаление типа события'
+        ],
         'level'                => [
             'index'  => 'Уровни',
             'create' => 'Создание уровня',
@@ -122,6 +133,9 @@ return [
         'default'              => [
             'created_at' => 'Дата создания',
             'updated_at' => 'Последнее редактирование'
+        ],
+        'event_types'          => [
+            'title' => 'Название'
         ]
     ],
     'permissions' => [
@@ -130,9 +144,11 @@ return [
         'lesson_element_types' => 'Типы элементов урока',
         'lesson_elements'      => 'Элементы урока',
         'dictionary'           => 'Словарь',
+        'event_types'          => 'Типы событий'
     ],
     'roles'       => [
-        'study' => 'Учебная программа'
+        'study'    => 'Учебная программа',
+        'schedule' => 'Календарь'
     ],
     'toasts'      => [
         'actions' => [

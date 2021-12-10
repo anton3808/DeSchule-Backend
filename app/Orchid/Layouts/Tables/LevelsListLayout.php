@@ -32,7 +32,7 @@ class LevelsListLayout extends Table
             TD::make('priority', __('orchid.models.level.priority'))->sort(),
             TD::make('updated_at', __('orchid.models.default.updated_at'))
                 ->render(function (Level $level) {
-                    return $level->updated_at->format('d.m.Y H:s:i');
+                    return $level->updated_at->format('d.m.Y H:i:s');
                 })
                 ->sort(),
             TD::make()

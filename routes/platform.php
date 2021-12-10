@@ -104,34 +104,39 @@ Route::screen('roles', RoleListScreen::class)
 //            ->push('Example screen');
 //    });
 
-Route::screen('example-fields', ExampleFieldsScreen::class)->name('platform.example.fields');
-Route::screen('example-layouts', ExampleLayoutsScreen::class)->name('platform.example.layouts');
-Route::screen('example-charts', ExampleChartsScreen::class)->name('platform.example.charts');
-Route::screen('example-editors', ExampleTextEditorsScreen::class)->name('platform.example.editors');
-Route::screen('example-cards', ExampleCardsScreen::class)->name('platform.example.cards');
-Route::screen('example-advanced', ExampleFieldsAdvancedScreen::class)->name('platform.example.advanced');
+Route::prefix('study')->group(function () {
+    Route::screen('example-fields', ExampleFieldsScreen::class)->name('platform.example.fields');
+    Route::screen('example-layouts', ExampleLayoutsScreen::class)->name('platform.example.layouts');
+    Route::screen('example-charts', ExampleChartsScreen::class)->name('platform.example.charts');
+    Route::screen('example-editors', ExampleTextEditorsScreen::class)->name('platform.example.editors');
+    Route::screen('example-cards', ExampleCardsScreen::class)->name('platform.example.cards');
+    Route::screen('example-advanced', ExampleFieldsAdvancedScreen::class)->name('platform.example.advanced');
 
 // Study
-Route::screen('levels', \App\Orchid\Screens\Study\LevelsScreen::class)->name('platform.study.levels.index');
-Route::screen('level/{level?}', \App\Orchid\Screens\Study\LevelEditScreen::class)
-    ->name('platform.study.levels.edit');
+    Route::screen('levels', \App\Orchid\Screens\Study\LevelsScreen::class)->name('platform.study.levels.index');
+    Route::screen('level/{level?}', \App\Orchid\Screens\Study\LevelEditScreen::class)
+        ->name('platform.study.levels.edit');
 
-Route::screen('lessons', \App\Orchid\Screens\Study\LessonsScreen::class)->name('platform.study.lessons.index');
-Route::screen('lesson/{lesson?}', \App\Orchid\Screens\Study\LessonEditScreen::class)
-    ->name('platform.study.lessons.edit');
+    Route::screen('lessons', \App\Orchid\Screens\Study\LessonsScreen::class)->name('platform.study.lessons.index');
+    Route::screen('lesson/{lesson?}', \App\Orchid\Screens\Study\LessonEditScreen::class)
+        ->name('platform.study.lessons.edit');
 
-Route::screen('lesson-element-types', \App\Orchid\Screens\Study\LessonElementTypesListScreen::class)->name('platform.study.lessons.lesson_element_types');
-Route::screen('lesson-element-types/{lesson_element_type}', \App\Orchid\Screens\Study\LessonElementTypeEditScreen::class)
-    ->name('platform.study.lesson_element_types.edit');
+    Route::screen('lesson-element-types', \App\Orchid\Screens\Study\LessonElementTypesListScreen::class)->name('platform.study.lessons.lesson_element_types');
+    Route::screen('lesson-element-types/{lesson_element_type}', \App\Orchid\Screens\Study\LessonElementTypeEditScreen::class)
+        ->name('platform.study.lesson_element_types.edit');
 
-Route::screen('lesson-elements', \App\Orchid\Screens\Study\LessonElementsListScreen::class)->name('platform.study.lesson_elements.index');
-Route::screen('lesson-element/{lesson_element?}', \App\Orchid\Screens\Study\LessonElementEditScreen::class)
-    ->name('platform.study.lesson_elements.edit');
-Route::get('lesson-elements/element-data-view', \App\Orchid\Controllers\Study\LessonElementDataController::class)->name('platform.study.lesson_elements.data-view');
-
+    Route::screen('lesson-elements', \App\Orchid\Screens\Study\LessonElementsListScreen::class)->name('platform.study.lesson_elements.index');
+    Route::screen('lesson-element/{lesson_element?}', \App\Orchid\Screens\Study\LessonElementEditScreen::class)
+        ->name('platform.study.lesson_elements.edit');
+    Route::get('lesson-elements/element-data-view', \App\Orchid\Controllers\Study\LessonElementDataController::class)->name('platform.study.lesson_elements.data-view');
+});
 
 Route::prefix('dictionary')->group(function () {
     Route::screen('words', \App\Orchid\Screens\Study\WordsScreen::class)->name('platform.study.dictionary.words.index');
     Route::screen('word/{word?}', \App\Orchid\Screens\Study\WordEditScreen::class)
         ->name('platform.study.dictionary.words.edit');
+});
+
+Route::prefix('schedule')->group(function () {
+    Route::screen('event-types', \App\Orchid\Screens\User\ScheduleEventTypesListScreen::class)->name('platform.user.schedule.event_types.index');
 });

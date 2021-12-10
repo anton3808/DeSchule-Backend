@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Modules\Study\Entities\Lesson;
 use Modules\Study\Transformers\LessonElement\LessonElementResource;
+use Modules\Study\Transformers\Level\LevelResource;
 
 class LessonResource extends JsonResource
 {
@@ -17,11 +18,11 @@ class LessonResource extends JsonResource
      */
     public function toArray($request): array
     {
-        /** @var Request|Lesson $this */
+        /** @var JsonResource|Lesson $this */
         return [
             'order'    => $this->order,
-            'level'    => $this->level_id,
-            'title'    => $this->getTranslation(app()->getLocale())->title,
+            'level'    => $this->whenLoaded('level', LevelResource::make($this->level), $this->level_id),
+            'title'    => $this->title,
             'elements' => LessonElementResource::collection($this->whenLoaded('elements'))
         ];
     }

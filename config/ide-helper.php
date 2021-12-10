@@ -132,6 +132,7 @@ return [
         'Modules\User\Entities',
         'Modules\Study\Entities',
         'Modules\Study\Entities\Dictionary',
+        'Modules\User\Entities\Schedule',
     ],
 
     /*

@@ -40,7 +40,7 @@ class LessonsListLayout extends Table
                 ->sort(),
             TD::make('updated_at', __('orchid.models.default.updated_at'))
                 ->render(function (Lesson $lesson) {
-                    return $lesson->updated_at->format('d.m.Y H:s:i');
+                    return $lesson->updated_at->format('d.m.Y H:i:s');
                 })
                 ->sort(),
             TD::make()

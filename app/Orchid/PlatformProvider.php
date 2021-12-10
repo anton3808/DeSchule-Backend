@@ -55,6 +55,14 @@ class PlatformProvider extends OrchidServiceProvider
                         ->route('platform.study.dictionary.words.index'),
                 ]),
 
+            Menu::make(__('orchid.menu.schedule.schedule'))
+                ->permission('schedule.*')
+                ->icon('event')
+                ->list([
+                    Menu::make(__('orchid.menu.schedule.event_types'))
+                        ->route('platform.user.schedule.event_types.index'),
+                ]),
+
 //            Menu::make('Example screen')
 //                ->icon('monitor')
 //                ->route('platform.example')
@@ -149,7 +157,9 @@ class PlatformProvider extends OrchidServiceProvider
                 ->addPermission('study.lessons', __('orchid.permissions.lessons'))
                 ->addPermission('study.lesson_element_types', __('orchid.permissions.lesson_element_types'))
                 ->addPermission('study.lesson_elements', __('orchid.permissions.lesson_elements'))
-                ->addPermission('study.dictionary', __('orchid.permissions.dictionary'))
+                ->addPermission('study.dictionary', __('orchid.permissions.dictionary')),
+            ItemPermission::group(__('orchid.roles.schedule'))
+                ->addPermission('schedule.event_types', __('orchid.permissions.event_types'))
         ];
     }
 }
