@@ -19,6 +19,7 @@ class ScheduleEventTypeResource extends JsonResource
         /** @var ScheduleEventType|JsonResource $this */
         return [
             'id'    => $this->id,
+            'slug'  => $this->slug,
             'title' => $this->title
         ];
     }

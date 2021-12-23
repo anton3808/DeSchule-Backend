@@ -14,4 +14,5 @@
 Route::apiResource('schedule', 'ScheduleController')->only(['index', 'store']);
 Route::prefix('schedule')->group(function () {
     Route::get('today', [\Modules\User\Http\Controllers\ScheduleController::class, 'today'])->name('schedule.today');
+    Route::get('event-types', [\Modules\User\Http\Controllers\ScheduleController::class, 'eventTypes'])->name('schedule.event-types');
 });

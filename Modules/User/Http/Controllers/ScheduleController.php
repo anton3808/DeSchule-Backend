@@ -13,6 +13,7 @@ use Modules\User\Entities\Schedule\ScheduleEvent;
 use Modules\User\Entities\Schedule\ScheduleEventType;
 use Modules\User\Http\Requests\Schedule\CreateScheduleEventRequest;
 use Modules\User\Transformers\Schedule\ScheduleEventResource;
+use Modules\User\Transformers\Schedule\ScheduleEventTypeResource;
 
 class ScheduleController extends Controller
 {
@@ -67,6 +68,11 @@ class ScheduleController extends Controller
                 ->whereDay('date', now()->day)
                 ->get()
         );
+    }
+
+    public function eventTypes(): AnonymousResourceCollection
+    {
+        return ScheduleEventTypeResource::collection(ScheduleEventType::all());
     }
 
 //    /**
