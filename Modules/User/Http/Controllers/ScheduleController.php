@@ -4,8 +4,10 @@ namespace Modules\User\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+
 //use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+
 //use Modules\Study\Entities\Lesson;
 use Modules\User\Entities\Schedule\ScheduleEvent;
 use Modules\User\Entities\Schedule\ScheduleEventType;
@@ -21,7 +23,20 @@ class ScheduleController extends Controller
      */
     public function index(Request $request): AnonymousResourceCollection
     {
-        return ScheduleEventResource::collection(ScheduleEvent::whereUserId($request->user('sanctum')->id)->get());
+        $year = (int)$request->get('year', 0);
+        $month = (int)$request->get('month', 0);
+        $day = (int)$request->get('day', 0);
+        $query = ScheduleEvent::whereUserId($request->user('sanctum')->id);
+        if ($year > 0) {
+            $query = $query->whereYear('date', $year);
+        }
+        if ($month > 0) {
+            $query = $query->whereMonth('date', $month);
+        }
+        if ($day > 0) {
+            $query = $query->whereDay('date', $day);
+        }
+        return ScheduleEventResource::collection($query->get());
     }
 
     /**
@@ -43,6 +58,15 @@ class ScheduleController extends Controller
         $event->save();
 
         return ScheduleEventResource::make($event);
+    }
+
+    public function today(Request $request): AnonymousResourceCollection
+    {
+        return ScheduleEventResource::collection(
+            ScheduleEvent::whereUserId($request->user('sanctum')->id)
+                ->whereDay('date', now()->day)
+                ->get()
+        );
     }
 
 //    /**
