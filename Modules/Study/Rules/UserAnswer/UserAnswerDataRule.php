@@ -13,6 +13,9 @@ class UserAnswerDataRule implements Rule
      */
     private $lessonElement;
 
+    /**
+     * @var string $message
+     */
     private $message;
 
     /**

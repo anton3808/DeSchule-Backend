@@ -4,6 +4,7 @@ namespace Modules\Study\Http\Requests\UserAnswer;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Modules\Study\Entities\LessonElement;
 use Modules\Study\Rules\UserAnswer\UserAnswerDataRule;
 
 class CreateUserAnswerRequest extends FormRequest
@@ -30,7 +31,12 @@ class CreateUserAnswerRequest extends FormRequest
         return [
             'user_id'           => 'required|numeric|exists:users,id',
             'lesson_id'         => 'required|numeric|exists:lessons,id',
-            'lesson_element_id' => 'required|numeric|exists:lesson_elements,id',
+            'lesson_element_id' => [
+                'required', 'numeric', 'exists:lesson_elements,id',
+                Rule::unique('user_answers')->where(function ($query) {
+                    return $query->where('lesson_id', $this->get('lesson_id'))->where('user_id', $this->get('user_id'));
+                })
+            ],
             'data'              => ['required', new UserAnswerDataRule($this->get('lesson_element_id'))],
             'data.*'            => [function ($attribute, $value, $fail) {
                 if (is_null($value)) {
@@ -38,6 +44,21 @@ class CreateUserAnswerRequest extends FormRequest
                 }
             }]
         ];
+    }
+
+    public function lessonElement(): LessonElement
+    {
+        return LessonElement::findOrFail($this->get('lesson_element_id'));
+    }
+
+    public function answers(): array
+    {
+        return $this->get('data');
+    }
+
+    public function validated(): array
+    {
+        return $this->only(['user_id', 'lesson_id', 'lesson_element_id']);
     }
 
     /**

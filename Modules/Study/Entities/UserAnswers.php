@@ -8,7 +8,7 @@ use Modules\User\Entities\User;
 
 class UserAnswers extends Model
 {
-    protected $fillable = ['user_id', 'lesson_id', 'lesson_element_id'];
+    protected $fillable = ['user_id', 'lesson_id', 'lesson_element_id', 'data'];
 
     public function user(): BelongsTo
     {

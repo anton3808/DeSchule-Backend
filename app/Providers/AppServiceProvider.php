@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Modules\Study\Services\UserAnswersProcessingService;
 use Modules\User\Entities\User;
 use Orchid\Platform\Models\User as OrchidUser;
 use Orchid\Support\Facades\Dashboard;
@@ -16,7 +17,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->singleton(UserAnswersProcessingService::class);
     }
 
     /**

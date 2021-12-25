@@ -4,7 +4,10 @@ namespace Modules\Study\Http\Controllers;
 
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Modules\Study\Entities\UserAnswers;
 use Modules\Study\Http\Requests\UserAnswer\CreateUserAnswerRequest;
+use Modules\Study\Services\UserAnswersProcessingService;
+use Modules\Study\Transformers\UserAnswers\UserAnswersResource;
 
 class UserAnswerController extends Controller
 {
@@ -20,11 +23,16 @@ class UserAnswerController extends Controller
     /**
      * Store a newly created resource in storage.
      * @param CreateUserAnswerRequest $request
-     * @return Response
+     * @param UserAnswersProcessingService $service
+     * @return UserAnswersResource
+     * @throws \Exception
      */
-    public function store(CreateUserAnswerRequest $request)
+    public function store(CreateUserAnswerRequest $request, UserAnswersProcessingService $service): UserAnswersResource
     {
-        dd($request->validated());
+        $answers = new UserAnswers($request->validated());
+        $answers->data = $service->processAnswers($request->lessonElement(), $request->answers());
+        $answers->save();
+        return UserAnswersResource::make($answers);
     }
 
 //    /**
