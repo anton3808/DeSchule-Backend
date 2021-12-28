@@ -12,6 +12,7 @@ use Illuminate\Routing\Controller;
 use Modules\User\Entities\Schedule\ScheduleEvent;
 use Modules\User\Entities\Schedule\ScheduleEventType;
 use Modules\User\Http\Requests\Schedule\CreateScheduleEventRequest;
+use Modules\User\Http\Requests\Schedule\DestroyScheduleEventRequest;
 use Modules\User\Transformers\Schedule\ScheduleEventResource;
 use Modules\User\Transformers\Schedule\ScheduleEventTypeResource;
 
@@ -95,14 +96,16 @@ class ScheduleController extends Controller
 //    {
 //        //
 //    }
-//
-//    /**
-//     * Remove the specified resource from storage.
-//     * @param int $id
-//     * @return Response
-//     */
-//    public function destroy($id)
-//    {
-//        //
-//    }
+
+    /**
+     * Remove the specified resource from storage.
+     * @param int $id
+     * @return ScheduleEventResource
+     */
+    public function destroy(int $id): ScheduleEventResource
+    {
+        $event = ScheduleEvent::whereUserId(request()->user('sanctum')->id)->where('id', $id)->firstOrFail();
+        $event->delete();
+        return ScheduleEventResource::make($event);
+    }
 }
