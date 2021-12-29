@@ -18,11 +18,12 @@ class ScheduleEventResource extends JsonResource
     {
         /** @var ScheduleEvent|JsonResource $this */
         return [
-            'event_type'    => $this->whenLoaded('eventType', ScheduleEventTypeResource::make($this->eventType), $this->event_type_id),
-            'title'         => $this->title,
-            'description'   => $this->description,
-            'link'          => $this->when(!!$this->link_resource, $this->link_resource),
-            'date'          => $this->date->format('d.m.Y H:i:s')
+            'id'          => $this->id,
+            'event_type'  => $this->whenLoaded('eventType', ScheduleEventTypeResource::make($this->eventType), $this->event_type_id),
+            'title'       => $this->title,
+            'description' => $this->description,
+            'link'        => $this->when(!!$this->link_resource, $this->link_resource),
+            'date'        => $this->date->format('d.m.Y H:i:s')
         ];
     }
 }
