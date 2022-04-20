@@ -20,7 +20,7 @@
         "laravel/sanctum": "^2.12",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.3",
-        "nwidart/laravel-modules": "^8.2",
+        "nwidart/laravel-modules": "8.2.*",
         "orchid/platform": "^10.22",
         "predis/predis": "^1.1"
     },
