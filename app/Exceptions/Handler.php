@@ -34,8 +34,16 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
-        $this->reportable(function (Throwable $e) {
-            //
+        $this->renderable(function (Throwable $e, $request) {
+            if ($request->is('api/*')) {
+                if ($e->getPrevious() instanceof Throwable) {
+                    return response(['error' => $e->getMessage()], $e->getCode() ?: 400);
+                }
+                return response()->json([
+                    'status' => 404,
+                    'message' => 'Запит не знайдено'
+                ], 404);
+            }
         });
     }
 }

@@ -17,3 +17,25 @@
 //Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //    return $request->user();
 //});
+
+Route::group(['prefix'=> 'auth'],function(){
+    Route::post('/register', '\App\Http\Controllers\Auth\AuthController@register');
+    Route::post('/login', '\App\Http\Controllers\Auth\AuthController@login');
+    Route::get('/refresh-token', '\App\Http\Controllers\Auth\AuthController@refreshToken');
+});
+
+Route::group(['prefix' => 'password'],function() {
+    Route::post('/email', '\App\Http\Controllers\Auth\ForgotPasswordController@getResetToken');
+    Route::post('/reset', '\App\Http\Controllers\Auth\ResetPasswordController@reset');
+});
+
+
+Route::group(['middleware' => 'jwt.auth'], function() {
+    Route::get('/users', '\App\Http\Controllers\UserController@index');
+
+    Route::group(['prefix'=> 'auth'],function(){
+        Route::post('/logout', '\App\Http\Controllers\Auth\AuthController@logout');
+        Route::get('/me', '\App\Http\Controllers\UserController@me');
+    });
+});
+
