@@ -57,7 +57,7 @@ class AuthController extends Controller
 
         try {
             // attempt to verify the credentials and create a token for the user
-            if (! $token = JWTAuth::attempt($credentials)) {
+            if (! $token = auth('api')->attempt($credentials)) {
                 return response()->json([
                     "error" => "invalid_credentials",
                     "message" => "Облікові дані користувача були неправильними."
@@ -81,10 +81,10 @@ class AuthController extends Controller
 
     public function refreshToken()
     {
-        $token = JWTAuth::getToken();
+        $token = auth('api')->getToken();
 
         try {
-            $token = JWTAuth::refresh($token);
+            $token = auth('api')->refresh($token);
         } catch (JWTException $e) {
             return response()->json([
                 'error' => 'could_not_create_token',
@@ -102,7 +102,7 @@ class AuthController extends Controller
      */
     public function logout()
     {
-        auth()->logout();
+        auth('api')->logout();
 
         return response()->json(['message' => 'Вийшов успішно']);
     }
@@ -129,7 +129,7 @@ class AuthController extends Controller
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60
+            'expires_in' => auth('api')->factory()->getTTL() * 60
         ]);
     }
 

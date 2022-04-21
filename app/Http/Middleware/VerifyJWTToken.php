@@ -20,7 +20,7 @@ class VerifyJwtToken
     {
         try {
 
-            if (!$user = JWTAuth::parseToken()->authenticate()) {
+            if (!$user = auth('api')->parseToken()->authenticate()) {
                 return response()->json(['user_not_found'], 404);
             }
 

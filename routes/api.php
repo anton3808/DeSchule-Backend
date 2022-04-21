@@ -31,7 +31,7 @@ Route::group(['prefix' => 'password'],function() {
 
 
 Route::group(['middleware' => 'jwt.auth'], function() {
-    Route::get('/users', '\App\Http\Controllers\UserController@index');
+    Route::apiResource('/users', '\App\Http\Controllers\UserController');
 
     Route::group(['prefix'=> 'auth'],function(){
         Route::post('/logout', '\App\Http\Controllers\Auth\AuthController@logout');
