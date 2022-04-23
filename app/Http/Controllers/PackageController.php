@@ -29,6 +29,7 @@ class PackageController extends Controller
         \App::setLocale($lang);
 
         $package = $this->package;
+        $package = $package->where('status', 'active');
         if($type) {
             $package = $package->where('type', $type);
         }
