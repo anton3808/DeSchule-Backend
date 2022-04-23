@@ -60,39 +60,48 @@ Request
 ```
 ```sh
 Refresh token GET /auth/refresh-token
-authorization: Bearer {token}
+Headers
+- Authorization: Bearer {token}
+
 ```
 ```sh
 Logout GET /auth/logout
-authorization: Bearer {token}
+Headers
+- Authorization: Bearer {token}
 ```
 ```sh
 My profile GET /auth/me
-authorization: Bearer {token}
+Headers
+- Authorization: Bearer {token}
 ```
 
 ## Users
 ```sh
 Find all GET /users
-authorization: Bearer {token}
+Headers
+- Authorization: Bearer {token}
 ```
 ```sh
 Find one GET /users/:id
-authorization: Bearer {token}
+Headers
+- Authorization: Bearer {token}
 ```
 ```sh
 Update profile PATCH /users/:id
-authorization: Bearer {token}
+Headers
+- Authorization: Bearer {token}
 ```
 ```sh
 Remove DELETE /users/:id
-authorization: Bearer {token}
+Headers
+- Authorization: Bearer {token}
 ```
 
 ## Packages
 ```sh
 Find all GET /packages
-Language: {locale}
+Headers
+- Language: {locale}
 Query params
 {
   "type": "course/traffic",
