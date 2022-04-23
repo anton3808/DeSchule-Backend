@@ -39,3 +39,5 @@ Route::group(['middleware' => 'jwt.auth'], function() {
     });
 });
 
+Route::apiResource('/packages', '\App\Http\Controllers\PackageController');
+

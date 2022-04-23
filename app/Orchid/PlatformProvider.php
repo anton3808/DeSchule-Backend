@@ -28,6 +28,11 @@ class PlatformProvider extends OrchidServiceProvider
         /** @var User $user */
         $user = request()->user();
         return [
+            Menu::make(__('orchid.menu.packages'))
+                //->permission('platform.package')
+                ->icon('list')
+                ->route('platform.packages.index'),
+
             Menu::make(__('orchid.menu.program'))
                 ->permission('study.*')
                 ->icon('modules')

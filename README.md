@@ -16,6 +16,7 @@
 - `php artisan jwt:secret` to generate JWT secret key
 - `php artisan migrate` to run migrations
 - `php artisan orchid:admin admin admin@admin.com password` to create admin user for admin panel
+- `php artisan storage:link` to symlinks
 
 ## Usage
 

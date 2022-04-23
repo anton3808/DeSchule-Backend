@@ -104,6 +104,11 @@ Route::screen('roles', RoleListScreen::class)
 //            ->push('Example screen');
 //    });
 
+//Package
+Route::screen('packages', \App\Orchid\Screens\Package\PackageListScreen::class)->name('platform.packages.index');
+Route::screen('package/{package?}', \App\Orchid\Screens\Package\PackageEditScreen::class)
+    ->name('platform.packages.edit');
+
 Route::prefix('study')->group(function () {
     Route::screen('example-fields', ExampleFieldsScreen::class)->name('platform.example.fields');
     Route::screen('example-layouts', ExampleLayoutsScreen::class)->name('platform.example.layouts');

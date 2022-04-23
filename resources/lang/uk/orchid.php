@@ -11,6 +11,7 @@ return [
             'dictionary' => 'Словник',
             'words'      => 'Слова'
         ],
+        'packages'       => 'Пакети',
         'schedule'             => [
             'schedule'    => 'Календар',
             'event_types' => 'Типи подій'
@@ -23,6 +24,13 @@ return [
             'update' => 'Редагування типу події',
             'show'   => 'Типи події',
             'delete' => 'Видалення типу події'
+        ],
+        'package'                => [
+            'index'  => 'Пакети',
+            'create' => 'Створення пакету',
+            'update' => 'Редагування пакета',
+            'show'   => 'Пакет',
+            'delete' => 'Видалення пакета'
         ],
         'level'                => [
             'index'  => 'Рівні',
@@ -72,6 +80,14 @@ return [
         'remove_item' => 'Видалити :item'
     ],
     'models'      => [
+        'package'                => [
+            'icon'     => 'Зображення ',
+            'price'    => 'Ціна',
+            'type'     => 'Тип',
+            'status'   => 'Статус',
+            'title'    => 'Назва',
+            'description'  => 'Опис'
+        ],
         'level'                => [
             'code'     => 'Код',
             'title'    => 'Назва',
