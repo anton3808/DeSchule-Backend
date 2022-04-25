@@ -104,10 +104,20 @@ Route::screen('roles', RoleListScreen::class)
 //            ->push('Example screen');
 //    });
 
-//Package
+//Packages
 Route::screen('packages', \App\Orchid\Screens\Package\PackageListScreen::class)->name('platform.packages.index');
 Route::screen('package/{package?}', \App\Orchid\Screens\Package\PackageEditScreen::class)
     ->name('platform.packages.edit');
+
+//Payments
+Route::screen('payments', \App\Orchid\Screens\Payment\PaymentScreen::class)->name('platform.payments.index');
+Route::screen('payment/{payment?}', \App\Orchid\Screens\Payment\PaymentEditScreen::class)
+    ->name('platform.payments.edit');
+
+//News
+Route::screen('news', \App\Orchid\Screens\News\NewsListScreen::class)->name('platform.news.index');
+Route::screen('news-form/{news?}', \App\Orchid\Screens\News\NewsEditScreen::class)
+    ->name('platform.news.edit');
 
 Route::prefix('study')->group(function () {
     Route::screen('example-fields', ExampleFieldsScreen::class)->name('platform.example.fields');

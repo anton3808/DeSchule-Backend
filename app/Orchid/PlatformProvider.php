@@ -33,6 +33,16 @@ class PlatformProvider extends OrchidServiceProvider
                 ->icon('list')
                 ->route('platform.packages.index'),
 
+            Menu::make(__('orchid.menu.payments'))
+                //->permission('platform.payments')
+                ->icon('credit-card')
+                ->route('platform.payments.index'),
+
+            Menu::make('Новини')
+                //->permission('platform.package')
+                ->icon('list')
+                ->route('platform.news.index'),
+
             Menu::make(__('orchid.menu.program'))
                 ->permission('study.*')
                 ->icon('modules')

@@ -2,12 +2,12 @@
 
 namespace App\Orchid\Layouts\Tables;
 
-use App\Models\Package\Package;
+use App\Models\News\News;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Layouts\Table;
 use Orchid\Screen\TD;
 
-class PackageListLayout extends Table
+class NewsListLayout extends Table
 {
     /**
      * Data source.
@@ -17,7 +17,7 @@ class PackageListLayout extends Table
      *
      * @var string
      */
-    protected $target = 'packages';
+    protected $target = 'news';
 
     /**
      * Get the table cells to be displayed.
@@ -28,18 +28,16 @@ class PackageListLayout extends Table
     {
         return [
             TD::make('title', __('orchid.models.package.title')),
-            TD::make('price', __('orchid.models.package.price')),
-            TD::make('type', __('orchid.models.package.type')),
             TD::make('status', __('orchid.models.package.status')),
             TD::make('updated_at', __('orchid.models.default.updated_at'))
-                ->render(function (Package $package) {
-                    return $package->updated_at->format('d.m.Y H:i:s');
+                ->render(function (News $news) {
+                    return $news->updated_at->format('d.m.Y H:i:s');
                 }),
             TD::make()
-                ->render(function (Package $package) {
+                ->render(function (News $news) {
                     return Link::make()
                         ->icon('pencil')
-                        ->route('platform.packages.edit', ['package' => $package->id]);
+                        ->route('platform.news.edit', ['news' => $news->id]);
                 })
         ];
     }

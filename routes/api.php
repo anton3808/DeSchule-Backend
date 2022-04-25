@@ -37,7 +37,10 @@ Route::group(['middleware' => 'jwt.auth'], function() {
         Route::post('/logout', '\App\Http\Controllers\Auth\AuthController@logout');
         Route::get('/me', '\App\Http\Controllers\UserController@me');
     });
+
+    Route::apiResource('/payments', '\App\Http\Controllers\PaymentController');
+    Route::apiResource('/comments', '\App\Http\Controllers\NewsCommentController');
 });
 
 Route::apiResource('/packages', '\App\Http\Controllers\PackageController');
-
+Route::apiResource('/news', '\App\Http\Controllers\NewsController');

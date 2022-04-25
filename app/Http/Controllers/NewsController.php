@@ -3,16 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Transformers\PackageResource;
+use App\Transformers\NewsResource;
 
-use App\Models\Package\Package;
+use App\Models\News\News;
 
-class PackageController extends Controller
+class NewsController extends Controller
 {
-    protected $package;
+    protected $news;
 
-    public function __construct(Package $package){
-        $this->package = $package;
+    public function __construct(News $news){
+        $this->news = $news;
     }
 
     /**
@@ -24,18 +24,14 @@ class PackageController extends Controller
     public function index(Request $request)
     {
         $lang = $request->header('Language', 'uk');
-        $type = $request->input('type');
         \App::setLocale($lang);
 
-        $package = $this->package;
-        $package = $package->where('status', 'active');
-        if($type) {
-            $package = $package->where('type', $type);
-        }
+        $news = $this->news->with('comments.replies');
+        $news = $news->where('status', 'active');
 
-        $package = $package->paginate($request->get('limit', 15));
+        $news = $news->paginate($request->get('limit', 15));
 
-        return PackageResource::collection($package);
+        return NewsResource::collection($news);
     }
 
     /**
@@ -61,8 +57,8 @@ class PackageController extends Controller
         $lang = $request->header('Language', 'uk');
         \App::setLocale($lang);
 
-        $package = $this->package->find($id);
-        return PackageResource::make($package);
+        $news = $this->news->with('comments.replies')->find($id);
+        return NewsResource::make($news);
     }
 
     /**

@@ -110,3 +110,64 @@ Query params
 ```sh
 Find one GET /packages/:id
 ```
+
+## Payments
+```sh
+Find all GET /payments
+Headers
+- Authorization: Bearer {token}
+```
+```sh
+Find one GET /payments/:id
+Headers
+- Authorization: Bearer {token}
+```
+```sh
+Create POST /payments/:id
+Headers
+- Authorization: Bearer {token}
+Request
+{
+  "package_id": 1,
+  "amount": 100,
+  "amount_type": "money" -> Optional, money or DT
+  "pay_from": "card" -> Optional, card or apple_pay or google_pay, etc.
+  "active_before": "2022-04-30 00:00:00"
+}
+```
+
+## News
+```sh
+Find all GET /news
+Headers
+- Authorization: Bearer {token}
+- Language: {locale}
+```
+```sh
+Find one GET /news/:id
+Headers
+- Authorization: Bearer {token}
+```
+
+## Comments
+```sh
+Find all GET /comments
+Headers
+- Authorization: Bearer {token}
+```
+```sh
+Find one GET /comments/:id
+Headers
+- Authorization: Bearer {token}
+```
+```sh
+Create POST /comments/:id
+Headers
+- Authorization: Bearer {token}
+Request
+{
+"news_id": 1,
+"content": 'My comment',
+"news_comment_id": 1 -> Optional, for reply
+}
+```
