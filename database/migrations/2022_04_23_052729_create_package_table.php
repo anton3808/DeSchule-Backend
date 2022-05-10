@@ -18,7 +18,7 @@ class CreatePackageTable extends Migration
 
             $table->string('image')->nullable();
             $table->string('price')->nullable();
-            $table->string('type')->comment('course/tariff');
+            $table->string('type')->default('additional')->comment('additional/main');
             $table->string('status')->default('active');
 
             $table->unsignedBigInteger('available_in_tariff_id')->nullable();

@@ -5,6 +5,7 @@ namespace App\Orchid\Screens\Study;
 use App\Orchid\Layouts\Tables\LessonElementTypesListLayout;
 use Modules\Study\Entities\LessonElementType;
 use Orchid\Screen\Action;
+use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Layout;
 use Orchid\Screen\Screen;
 
@@ -50,7 +51,11 @@ class LessonElementTypesListScreen extends Screen
      */
     public function commandBar(): array
     {
-        return [];
+        return [
+//            Link::make(__('orchid.links.create'))
+//                ->icon('pencil')
+//                ->route('platform.study.lesson_element_type.edit')
+        ];
     }
 
     /**

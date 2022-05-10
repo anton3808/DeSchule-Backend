@@ -171,3 +171,47 @@ Request
 "news_comment_id": 1 -> Optional, for reply
 }
 ```
+
+## Schedule
+```sh
+Find all GET /u/schedule
+Headers
+- Authorization: Bearer {token}
+```
+```sh
+Find one GET /u/schedule/:id
+Headers
+- Authorization: Bearer {token}
+```
+```sh
+Create POST /u/schedule
+Headers
+- Authorization: Bearer {token}
+Request
+{
+"event_type_id": 1,
+"title": 'Онлайн',
+"date": "2022-05-30 00:00:00"
+}
+```
+
+## Challenge
+```sh
+Find all GET /challenge
+Headers
+- Authorization: Bearer {token}
+```
+```sh
+Find one GET /challenge/:id
+Headers
+- Authorization: Bearer {token}
+```
+```sh
+Create POST /challenge
+Headers
+- Authorization: Bearer {token}
+Request
+{
+"lesson_id": 1
+}
+```

@@ -44,3 +44,10 @@ Route::group(['middleware' => 'jwt.auth'], function() {
 
 Route::apiResource('/packages', '\App\Http\Controllers\PackageController');
 Route::apiResource('/news', '\App\Http\Controllers\NewsController');
+
+Route::apiResource('/u/schedule', '\App\Http\Controllers\ScheduleController')->only(['index', 'store', 'destroy']);
+Route::prefix('/u/schedule')->group(function () {
+    Route::get('today', [\App\Http\Controllers\ScheduleController::class, 'today']);
+});
+
+Route::apiResource('/challenge', '\App\Http\Controllers\ChallengeController');

@@ -7,6 +7,7 @@ use App\Models\News\News;
 use Orchid\Screen\Fields\Cropper;
 use Orchid\Screen\Fields\Group;
 use Orchid\Screen\Fields\Input;
+use Orchid\Screen\Fields\Quill;
 use Orchid\Screen\Fields\Select;
 use Orchid\Support\Facades\Layout as LayoutFacade;
 use Orchid\Screen\Repository;
@@ -43,10 +44,11 @@ class NewsElementComponent extends Component
             }
             array_push($inputs, $input);
 
-            $input = Input::make("description.$locale")
-                ->title(__('orchid.models.package.description') . " ($locale)")
-                ->required()
-                ->placeholder(__('orchid.models.package.description'));
+            $input = Quill::make("description.$locale")->title(__('orchid.models.package.description'))->placeholder(__('orchid.models.package.description'));
+//            $input = Input::make("description.$locale")
+//                ->title(__('orchid.models.package.description') . " ($locale)")
+//                ->required()
+//                ->placeholder(__('orchid.models.package.description'));
             if ($this->exists) {
                 $input->value($this->news->getTranslation($locale)->description);
             }

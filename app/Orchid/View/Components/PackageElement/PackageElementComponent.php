@@ -7,6 +7,7 @@ use App\Models\Package\Package;
 use Orchid\Screen\Fields\Cropper;
 use Orchid\Screen\Fields\Group;
 use Orchid\Screen\Fields\Input;
+use Orchid\Screen\Fields\Quill;
 use Orchid\Screen\Fields\Select;
 use Orchid\Support\Facades\Layout as LayoutFacade;
 use Orchid\Screen\Repository;
@@ -43,10 +44,7 @@ class PackageElementComponent extends Component
             }
             array_push($inputs, $input);
 
-            $input = Input::make("description.$locale")
-                ->title(__('orchid.models.package.description') . " ($locale)")
-                ->required()
-                ->placeholder(__('orchid.models.package.description'));
+            $input = Quill::make("description.$locale")->title(__('orchid.models.package.description'))->placeholder(__('orchid.models.package.description'));
             if ($this->exists) {
                 $input->value($this->package->getTranslation($locale)->description);
             }
@@ -64,8 +62,8 @@ class PackageElementComponent extends Component
                     Select::make('type')
                         ->value($this->exists ? $this->package->type : null)
                         ->options([
-                            'course'   => 'Course',
-                            'tariff' => 'Tariff',
+                            'additional'   => 'Additional',
+                            'main' => 'Main',
                         ])
                         ->title(__('orchid.models.package.type')),
                     Select::make('status')
