@@ -2,6 +2,7 @@
 
 namespace App\Models\News;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Orchid\Screen\AsSource;
 
@@ -42,6 +43,11 @@ class NewsComment extends Model
     public function news()
     {
         return $this->belongsTo(News::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
     public function child()

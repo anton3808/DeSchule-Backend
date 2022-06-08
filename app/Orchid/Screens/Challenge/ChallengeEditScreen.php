@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Orchid\Screens\Package;
+namespace App\Orchid\Screens\Challenge;
 
-use App\Orchid\View\Components\PackageElement\PackageElementComponent;
+use App\Orchid\View\Components\ChallengeElement\ChallengeElementComponent;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use App\Models\Package\Package;
+use App\Models\Challenge\Challenge;
 use Orchid\Screen\Action;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Layout;
@@ -14,14 +14,14 @@ use Orchid\Support\Facades\Alert;
 use Orchid\Support\Facades\Layout as LayoutFacade;
 use Orchid\Support\Facades\Toast;
 
-class PackageEditScreen extends Screen
+class ChallengeEditScreen extends Screen
 {
     /**
      * Display header name.
      *
      * @var string
      */
-    public $name = 'PackageEditScreen';
+    public $name = 'ChallengeEditScreen';
 
     /**
      * @var bool
@@ -31,20 +31,20 @@ class PackageEditScreen extends Screen
     /**
      * Query data.
      *
-     * @param Package $package
+     * @param Challenge $challenge
      * @return array
      */
-    public function query(Package $package): array
+    public function query(Challenge $challenge): array
     {
-        $this->exists = $package->exists;
+        $this->exists = $challenge->exists;
 
         if ($this->exists) {
-            $this->name = __('orchid.pages.package.update');
+            $this->name = 'Редагування Челенджу';
         } else {
-            $this->name = __('orchid.pages.package.create');
+            $this->name = 'Створення Челенджу';
         }
 
-        return $package->getAttributes();
+        return $challenge->getAttributes();
     }
 
     /**
@@ -53,7 +53,7 @@ class PackageEditScreen extends Screen
      * @var array|string
      */
     public $permission = [
-        //'platform.packages'
+        //'platform.news'
     ];
 
     /**
@@ -87,49 +87,48 @@ class PackageEditScreen extends Screen
     public function layout(): array
     {
         return [
-            LayoutFacade::component(PackageElementComponent::class)
+            LayoutFacade::component(ChallengeElementComponent::class)
         ];
     }
 
     /**
-     * @param Package $package
+     * @param Challenge $challenge
      * @param Request $request
      * @return RedirectResponse
      */
-    public function createOrUpdate(Package $package, Request $request): RedirectResponse
+    public function createOrUpdate(Challenge $challenge, Request $request): RedirectResponse
     {
         $request->validate([
-            'image'            => ['nullable', 'string'],
+            'order'            => ['required', 'string'],
+            'level_id'      => ['required', 'string'],
+            'dt'            => ['required', 'string'],
             'status' => ['required', 'string'],
-            'price' => ['nullable', 'numeric', 'min:1'],
             'title.*'         => 'string',
-            'description.*'   => 'string',
         ]);
 
         foreach (config('locales') as $locale) {
-            $package->translateOrNew($locale)->title = $request->get('title')[$locale];
-            $package->translateOrNew($locale)->description = $request->get('description')[$locale];
+            $challenge->translateOrNew($locale)->title = $request->get('title')[$locale];
         }
 
-        $package->fill($request->only(['type', 'status', 'image', 'price']) + ['type' => 'main']);
+        $challenge->fill($request->only(['order', 'level_id', 'dt', 'status']));
 
-        $package->save();
+        $challenge->save();
 
         Toast::info(__('orchid.toasts.actions.saved'));
 
-        return redirect()->route('platform.packages.edit', ['package' => $package->id]);
+        return redirect()->route('platform.challenges.edit', ['challenge' => $challenge->id]);
     }
 
     /**
-     * @param Package $package
+     * @param Challenge $challenge
      * @return RedirectResponse
      */
-    public function remove(Package $package): RedirectResponse
+    public function remove(Challenge $challenge): RedirectResponse
     {
-        $package->delete();
+        $challenge->delete();
 
         Alert::info(__('orchid.toasts.actions.deleted'));
 
-        return redirect()->route('platform.packages.index');
+        return redirect()->route('platform.challenges.index');
     }
 }

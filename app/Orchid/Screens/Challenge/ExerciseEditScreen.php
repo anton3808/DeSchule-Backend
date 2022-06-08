@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Orchid\Screens\Package;
+namespace App\Orchid\Screens\Challenge;
 
-use App\Orchid\View\Components\PackageElement\PackageElementComponent;
+use App\Orchid\View\Components\ChallengeElement\ExerciseElementComponent;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use App\Models\Package\Package;
+use App\Models\Challenge\ChallengeExercise;
 use Orchid\Screen\Action;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Layout;
@@ -14,7 +14,7 @@ use Orchid\Support\Facades\Alert;
 use Orchid\Support\Facades\Layout as LayoutFacade;
 use Orchid\Support\Facades\Toast;
 
-class PackageEditScreen extends Screen
+class ExerciseEditScreen extends Screen
 {
     /**
      * Display header name.
@@ -31,12 +31,12 @@ class PackageEditScreen extends Screen
     /**
      * Query data.
      *
-     * @param Package $package
+     * @param ChallengeExercise $exercise
      * @return array
      */
-    public function query(Package $package): array
+    public function query(ChallengeExercise $exercise): array
     {
-        $this->exists = $package->exists;
+        $this->exists = $exercise->exists;
 
         if ($this->exists) {
             $this->name = __('orchid.pages.package.update');
@@ -44,7 +44,7 @@ class PackageEditScreen extends Screen
             $this->name = __('orchid.pages.package.create');
         }
 
-        return $package->getAttributes();
+        return $exercise->getAttributes();
     }
 
     /**
@@ -87,49 +87,46 @@ class PackageEditScreen extends Screen
     public function layout(): array
     {
         return [
-            LayoutFacade::component(PackageElementComponent::class)
+            LayoutFacade::component(ExerciseElementComponent::class)
         ];
     }
 
     /**
-     * @param Package $package
+     * @param ChallengeExercise $exercise
      * @param Request $request
      * @return RedirectResponse
      */
-    public function createOrUpdate(Package $package, Request $request): RedirectResponse
+    public function createOrUpdate(ChallengeExercise $exercise, Request $request): RedirectResponse
     {
         $request->validate([
             'image'            => ['nullable', 'string'],
             'status' => ['required', 'string'],
-            'price' => ['nullable', 'numeric', 'min:1'],
-            'title.*'         => 'string',
-            'description.*'   => 'string',
+            'challenge_id' => ['required'],
+            'location' => ['required','string'],
+            'main_line' => ['required','string'],
+            'character_id' => ['required'],
+            'content' => ['required','string'],
         ]);
 
-        foreach (config('locales') as $locale) {
-            $package->translateOrNew($locale)->title = $request->get('title')[$locale];
-            $package->translateOrNew($locale)->description = $request->get('description')[$locale];
-        }
+        $exercise->fill($request->only(['image', 'status', 'challenge_id', 'location', 'main_line', 'character_id', 'content']));
 
-        $package->fill($request->only(['type', 'status', 'image', 'price']) + ['type' => 'main']);
-
-        $package->save();
+        $exercise->save();
 
         Toast::info(__('orchid.toasts.actions.saved'));
 
-        return redirect()->route('platform.packages.edit', ['package' => $package->id]);
+        return redirect()->route('platform.exercises.edit', ['exercise' => $exercise->id]);
     }
 
     /**
-     * @param Package $package
+     * @param ChallengeExercise $exercise
      * @return RedirectResponse
      */
-    public function remove(Package $package): RedirectResponse
+    public function remove(ChallengeExercise $exercise): RedirectResponse
     {
-        $package->delete();
+        $exercise->delete();
 
         Alert::info(__('orchid.toasts.actions.deleted'));
 
-        return redirect()->route('platform.packages.index');
+        return redirect()->route('platform.exercises.index');
     }
 }

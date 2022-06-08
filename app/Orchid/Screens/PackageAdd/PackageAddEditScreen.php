@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Orchid\Screens\Package;
+namespace App\Orchid\Screens\PackageAdd;
 
-use App\Orchid\View\Components\PackageElement\PackageElementComponent;
+use App\Orchid\View\Components\PackageAddElement\PackageAddElementComponent;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\Package\Package;
@@ -14,14 +14,14 @@ use Orchid\Support\Facades\Alert;
 use Orchid\Support\Facades\Layout as LayoutFacade;
 use Orchid\Support\Facades\Toast;
 
-class PackageEditScreen extends Screen
+class PackageAddEditScreen extends Screen
 {
     /**
      * Display header name.
      *
      * @var string
      */
-    public $name = 'PackageEditScreen';
+    public $name = 'PackageAddEditScreen';
 
     /**
      * @var bool
@@ -39,9 +39,9 @@ class PackageEditScreen extends Screen
         $this->exists = $package->exists;
 
         if ($this->exists) {
-            $this->name = __('orchid.pages.package.update');
+            $this->name = __('orchid.pages.package_add.update');
         } else {
-            $this->name = __('orchid.pages.package.create');
+            $this->name = __('orchid.pages.package_add.create');
         }
 
         return $package->getAttributes();
@@ -87,7 +87,7 @@ class PackageEditScreen extends Screen
     public function layout(): array
     {
         return [
-            LayoutFacade::component(PackageElementComponent::class)
+            LayoutFacade::component(PackageAddElementComponent::class)
         ];
     }
 
@@ -111,13 +111,13 @@ class PackageEditScreen extends Screen
             $package->translateOrNew($locale)->description = $request->get('description')[$locale];
         }
 
-        $package->fill($request->only(['type', 'status', 'image', 'price']) + ['type' => 'main']);
+        $package->fill($request->only(['type', 'status', 'image', 'price']) + ['type' => 'additional']);
 
         $package->save();
 
         Toast::info(__('orchid.toasts.actions.saved'));
 
-        return redirect()->route('platform.packages.edit', ['package' => $package->id]);
+        return redirect()->route('platform.packages_add.edit', ['package' => $package->id]);
     }
 
     /**
@@ -130,6 +130,6 @@ class PackageEditScreen extends Screen
 
         Alert::info(__('orchid.toasts.actions.deleted'));
 
-        return redirect()->route('platform.packages.index');
+        return redirect()->route('platform.packages_add.index');
     }
 }

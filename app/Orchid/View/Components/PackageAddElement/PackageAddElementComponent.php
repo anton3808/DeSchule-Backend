@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Orchid\View\Components\PackageElement;
+namespace App\Orchid\View\Components\PackageAddElement;
 
 use Illuminate\View\Component;
 use App\Models\Package\Package;
@@ -12,7 +12,7 @@ use Orchid\Screen\Fields\Select;
 use Orchid\Support\Facades\Layout as LayoutFacade;
 use Orchid\Screen\Repository;
 
-class PackageElementComponent extends Component
+class PackageAddElementComponent extends Component
 {
     /**
      * @var Package $package

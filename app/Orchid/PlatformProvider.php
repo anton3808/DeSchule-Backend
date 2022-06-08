@@ -28,6 +28,11 @@ class PlatformProvider extends OrchidServiceProvider
         /** @var User $user */
         $user = request()->user();
         return [
+            Menu::make(__('orchid.menu.packages_add'))
+                //->permission('platform.package')
+                ->icon('list')
+                ->route('platform.packages_add.index'),
+
             Menu::make(__('orchid.menu.packages'))
                 //->permission('platform.package')
                 ->icon('list')
@@ -39,9 +44,25 @@ class PlatformProvider extends OrchidServiceProvider
                 ->route('platform.payments.index'),
 
             Menu::make('Новини')
-                //->permission('platform.package')
                 ->icon('list')
-                ->route('platform.news.index'),
+                ->list([
+                    Menu::make('Новини')
+                        ->route('platform.news.index'),
+                    Menu::make('Коментарі')
+                        ->route('platform.comments.index'),
+                ]),
+
+            Menu::make('Челенджи')
+                ->icon('list')
+                ->list([
+                    Menu::make('Челенджи')
+                        ->route('platform.challenges.index'),
+                    Menu::make('Діалогі')
+                        ->route('platform.exercises.index'),
+                    Menu::make('Персонажі')
+                        ->route('platform.characters.index'),
+                ]),
+
 
             Menu::make(__('orchid.menu.program'))
                 ->permission('study.*')

@@ -1,26 +1,26 @@
 <?php
 
-namespace App\Orchid\Screens\Package;
+namespace App\Orchid\Screens\PackageAdd;
 
-use App\Orchid\Layouts\Tables\PackageListLayout;
+use App\Orchid\Layouts\Tables\PackageAddListLayout;
 use App\Models\Package\Package;
 use Orchid\Screen\Action;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Layout;
 use Orchid\Screen\Screen;
 
-class PackageListScreen extends Screen
+class PackageAddListScreen extends Screen
 {
     /**
      * Display header name.
      *
      * @var string
      */
-    public $name = 'Packages';
+    public $name = 'PackagesAdd';
 
     public function __construct()
     {
-        $this->name = __('orchid.pages.package.index');
+        $this->name = __('orchid.pages.package_add.index');
     }
 
     /**
@@ -31,7 +31,7 @@ class PackageListScreen extends Screen
     public function query(): array
     {
         return [
-            'packages' => Package::where('type', 'main')->paginate(),
+            'packages' => Package::where('type', 'additional')->paginate(),
         ];
     }
 
@@ -54,7 +54,7 @@ class PackageListScreen extends Screen
         return [
             Link::make(__('orchid.links.create'))
                 ->icon('pencil')
-                ->route('platform.packages.edit')
+                ->route('platform.packages_add.edit')
         ];
     }
 
@@ -66,7 +66,7 @@ class PackageListScreen extends Screen
     public function layout(): array
     {
         return [
-            PackageListLayout::class
+            PackageAddListLayout::class
         ];
     }
 }

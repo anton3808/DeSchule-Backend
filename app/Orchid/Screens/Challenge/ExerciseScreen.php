@@ -1,26 +1,26 @@
 <?php
 
-namespace App\Orchid\Screens\Package;
+namespace App\Orchid\Screens\Challenge;
 
-use App\Orchid\Layouts\Tables\PackageListLayout;
-use App\Models\Package\Package;
+use App\Models\Challenge\ChallengeExercise;
+use App\Orchid\Layouts\Tables\ExerciseListLayout;
 use Orchid\Screen\Action;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Layout;
 use Orchid\Screen\Screen;
 
-class PackageListScreen extends Screen
+class ExerciseScreen extends Screen
 {
     /**
      * Display header name.
      *
      * @var string
      */
-    public $name = 'Packages';
+    public $name = 'Exercises';
 
     public function __construct()
     {
-        $this->name = __('orchid.pages.package.index');
+        $this->name = 'Діалог';
     }
 
     /**
@@ -31,7 +31,7 @@ class PackageListScreen extends Screen
     public function query(): array
     {
         return [
-            'packages' => Package::where('type', 'main')->paginate(),
+            'exercises' => ChallengeExercise::paginate(),
         ];
     }
 
@@ -41,7 +41,7 @@ class PackageListScreen extends Screen
      * @var array|string
      */
     public $permission = [
-        //'platform.packages'
+        //'platform.exercises'
     ];
 
     /**
@@ -54,7 +54,7 @@ class PackageListScreen extends Screen
         return [
             Link::make(__('orchid.links.create'))
                 ->icon('pencil')
-                ->route('platform.packages.edit')
+                ->route('platform.exercises.edit')
         ];
     }
 
@@ -66,7 +66,7 @@ class PackageListScreen extends Screen
     public function layout(): array
     {
         return [
-            PackageListLayout::class
+            ExerciseListLayout::class
         ];
     }
 }

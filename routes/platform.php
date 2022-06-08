@@ -109,6 +109,10 @@ Route::screen('packages', \App\Orchid\Screens\Package\PackageListScreen::class)-
 Route::screen('package/{package?}', \App\Orchid\Screens\Package\PackageEditScreen::class)
     ->name('platform.packages.edit');
 
+Route::screen('packages-additional', \App\Orchid\Screens\PackageAdd\PackageAddListScreen::class)->name('platform.packages_add.index');
+Route::screen('package-additional/{package?}', \App\Orchid\Screens\PackageAdd\PackageAddEditScreen::class)
+    ->name('platform.packages_add.edit');
+
 //Payments
 Route::screen('payments', \App\Orchid\Screens\Payment\PaymentScreen::class)->name('platform.payments.index');
 Route::screen('payment/{payment?}', \App\Orchid\Screens\Payment\PaymentEditScreen::class)
@@ -118,6 +122,24 @@ Route::screen('payment/{payment?}', \App\Orchid\Screens\Payment\PaymentEditScree
 Route::screen('news', \App\Orchid\Screens\News\NewsListScreen::class)->name('platform.news.index');
 Route::screen('news-form/{news?}', \App\Orchid\Screens\News\NewsEditScreen::class)
     ->name('platform.news.edit');
+
+//Comments
+Route::screen('comments', \App\Orchid\Screens\Comment\CommentScreen::class)->name('platform.comments.index');
+Route::screen('comment/{comment?}', \App\Orchid\Screens\Comment\CommentEditScreen::class)
+    ->name('platform.comments.edit');
+
+//Challenges
+Route::screen('challenges', \App\Orchid\Screens\Challenge\ChallengeScreen::class)->name('platform.challenges.index');
+Route::screen('challenge/{challenge?}', \App\Orchid\Screens\Challenge\ChallengeEditScreen::class)
+    ->name('platform.challenges.edit');
+
+Route::screen('characters', \App\Orchid\Screens\Challenge\CharacterScreen::class)->name('platform.characters.index');
+Route::screen('character/{character?}', \App\Orchid\Screens\Challenge\CharacterEditScreen::class)
+    ->name('platform.characters.edit');
+
+Route::screen('exercises', \App\Orchid\Screens\Challenge\ExerciseScreen::class)->name('platform.exercises.index');
+Route::screen('exercise/{exercise?}', \App\Orchid\Screens\Challenge\ExerciseEditScreen::class)
+    ->name('platform.exercises.edit');
 
 Route::prefix('study')->group(function () {
     Route::screen('example-fields', ExampleFieldsScreen::class)->name('platform.example.fields');

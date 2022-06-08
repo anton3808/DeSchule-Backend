@@ -2,26 +2,25 @@
 
 namespace App\Models\Challenge;
 
+use Astrotomic\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Model;
-use Modules\Study\Entities\Lesson;
+use Modules\Study\Entities\Level;
 use Orchid\Screen\AsSource;
 
 class Challenge extends Model
 {
-    use AsSource;
+    use Translatable, AsSource;
 
     protected $table = 'challenge';
 
+    public $translatedAttributes = ['title'];
+
     protected $fillable = [
-        'user_id',
-        'lesson_id',
+        'order',
+        'level_id',
+        'dt',
         'status',
     ];
-
-    protected $casts = [
-        'stream' => 'array'
-    ];
-
 
     /**
      * The attributes for which you can use filters in url.
@@ -30,7 +29,6 @@ class Challenge extends Model
      */
     protected $allowedFilters = [
         'id',
-        'status',
         'status',
         'updated_at',
         'created_at',
@@ -53,8 +51,8 @@ class Challenge extends Model
         return $this->hasOne(User::class, 'id', 'user_id');
     }
 
-    public function lesson()
+    public function level()
     {
-        return $this->hasOne(Lesson::class, 'id', 'lesson_id');
+        return $this->hasOne(Level::class, 'id', 'level_id');
     }
 }
